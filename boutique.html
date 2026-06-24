@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGILEC · Boutique </title>
+  <meta name="google-site-verification" content="WhFounBUvL8lYCdjabRKBFmKEvzMrFXhK7qXd0Ht2wI" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+   <!-- Icon Logo -->
+  <link rel="shortcut icon" href="images/Regilec.png"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --rouge-profond: #16a5aa;
+      --or-eclatant: #000000;
+      --vert-emeraude: #16a5aa;
+      --blanc-casse: #FDF5E6;
+      --gris-elegant: #2c2c2c;
+      --ombre-legere: rgba(0, 0, 0, 0.03);
+      --ombre-doree: rgba(212, 175, 55, 0.15);
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--blanc-casse);
+      color: var(--gris-elegant);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Logo avec image réelle */
+    .logo-njeeygu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-image {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--or-eclatant);
+      box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+      background: white;
+    }
+    .logo-text {
+      font-weight: 700;
+      color: var(--rouge-profond);
+      line-height: 1;
+      font-size: 1.1rem;
+    }
+    .logo-text .le-grand-jour {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--blanc-casse);
+      background: var(--rouge-profond);
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    
+    /* Navbar ultra compacte */
+    .navbar {
+      background: var(--blanc-casse) !important;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 0.2rem 0;
+      box-shadow: 0 2px 10px var(--ombre-legere);
+    }
+    .nav-link {
+      color: var(--rouge-profond) !important;
+      font-weight: 500;
+      margin: 0 6px;
+      padding: 0.2rem 0 !important;
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--or-eclatant) !important;
+    }
+    .nav-link.active {
+      font-weight: 600;
+    }
+    
+    /* Boutons compacts */
+    .btn-rouge, .btn-or, .btn-devis {
+      padding: 8px 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-rouge {
+      background: var(--rouge-profond);
+      color: var(--blanc-casse);
+      box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+    }
+    .btn-or {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      box-shadow: 0 3px 10px rgba(212,175,55,0.2);
+    }
+    .btn-devis {
+      background: var(--vert-emeraude);
+      color: white;
+      box-shadow: 0 3px 10px rgba(0,107,84,0.2);
+      width: 100%;
+    }
+    .btn-rouge:hover {
+      background: #6b0000;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139,0,0,0.3);
+    }
+    .btn-or:hover {
+      background: #b8960f;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+    }
+    .btn-devis:hover {
+      background: #004c3a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,107,84,0.3);
+    }
+    
+    /* Hero Boutique */
+    .hero-boutique {
+      background: url('SerHead/head2.png') no-repeat;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 40px 0 50px;
+      position: relative;
+      text-align: center;
+      position: relative;
+    }
+    .hero-boutique::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero-boutique .container {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-boutique h1 {
+      font-size: 2.5rem;
+      color: var(--or-eclatant);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .hero-boutique p {
+      font-size: 1rem;
+      max-width: 700px;
+      opacity: 0.95;
+      margin-left: auto;
+      margin-right: auto;
+      color: white;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--or-eclatant);
+      padding: 0.2rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      color: var(--or-eclatant);
+    }
+    .hero-boutique .d-flex {
+      justify-content: center;
+    }
+    
+    /* Section présentation */
+    .presentation-banner {
+      background: linear-gradient(135deg, #f8f1e0, #fff);
+      padding: 60px 0;
+      border-bottom: 2px solid var(--or-eclatant);
+      border-top: 2px solid var(--or-eclatant);
+    }
+    .presentation-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .presentation-text {
+      flex: 1;
+    }
+    .presentation-text h2 {
+      color: var(--rouge-profond);
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .presentation-text h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background: var(--or-eclatant);
+    }
+    .presentation-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 30px;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--rouge-profond);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--or-eclatant);
+      font-weight: 600;
+    }
+    .presentation-image {
+      flex: 1;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      border: 3px solid var(--or-eclatant);
+      transform: rotate(2deg);
+      transition: transform 0.3s;
+    }
+    .presentation-image:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+    .presentation-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Filtres */
+    .filtres-container {
+      padding: 40px 0 20px;
+    }
+    .filtre-categorie {
+      display: inline-block;
+      padding: 8px 20px;
+      margin: 0 5px 10px;
+      border: 2px solid var(--or-eclatant);
+      border-radius: 40px;
+      color: var(--rouge-profond);
+      font-weight: 500;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+    }
+    .filtre-categorie:hover,
+    .filtre-categorie.active {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px var(--ombre-doree);
+    }
+    
+    /* Cards produits - SANS PRIX */
+    .product-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px var(--ombre-legere);
+      transition: all 0.3s ease;
+      height: 100%;
+      border: 1px solid rgba(212,175,55,0.1);
+    }
+    .product-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 25px 45px var(--ombre-doree);
+    }
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      z-index: 2;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .product-img-container {
+      overflow: hidden;
+      height: 200px;
+      position: relative;
+    }
+    .product-img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+      transition: transform 0.5s;
+      border-bottom: 2px solid rgba(212,175,55,0.2);
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.1);
+    }
+    .product-content {
+      padding: 1.5rem 1rem 1.2rem;
+    }
+    .product-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--or-eclatant);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--rouge-profond);
+      margin-bottom: 0.5rem;
+    }
+    .product-desc {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+    
+    /* Modal devis personnalisé */
+    .devis-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+    .devis-modal-content {
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 3px solid var(--or-eclatant);
+    }
+    .devis-modal h3 {
+      color: var(--rouge-profond);
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 0.9rem;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--or-eclatant);
+      outline: none;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .modal-actions button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .btn-cancel {
+      background: #eee;
+    }
+    .btn-submit {
+      background: var(--vert-emeraude);
+      color: white;
+    }
+    
+    /* Newsletter */
+    .newsletter-section {
+      background: var(--vert-emeraude);
+      padding: 40px 0;
+      color: white;
+      text-align: center;
+    }
+    .newsletter-form {
+      max-width: 500px;
+      margin: 20px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+    }
+    .newsletter-form button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--rouge-profond);
+      color: var(--blanc-casse);
+      padding: 40px 0 20px;
+      border-top: 2px solid var(--or-eclatant);
+      margin-top: 60px;
+    }
+    .footer-title {
+      color: var(--or-eclatant);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    .social-links a {
+      width: 32px;
+      height: 32px;
+      background: rgba(212,175,55,0.1);
+      color: var(--or-eclatant);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      border: 1px solid var(--or-eclatant);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+    .footer-links a:hover {
+      color: var(--or-eclatant);
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1140px;
+    }
+    
+    /* Toast notification */
+    .toast-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 9999;
+      animation: slideInRight 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+    .toast-notification.success {
+      background: var(--vert-emeraude);
+    }
+    .toast-notification.error {
+      background: #dc3545;
+    }
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Admin badge */
+    .admin-badge {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: var(--rouge-profond);
+      color: var(--or-eclatant);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1001;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 2px solid var(--or-eclatant);
+      cursor: pointer;
+    }
+    
+    /* Message devis uniquement */
+    .devis-only-message {
+      text-align: center;
+      color: var(--vert-emeraude);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      padding: 5px;
+      background: rgba(0,107,84,0.05);
+      border-radius: 20px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-boutique h1 {
+        font-size: 2rem;
+      }
+      .presentation-content {
+        flex-direction: column;
+      }
+      .presentation-stats {
+        justify-content: center;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
+      .row > .col-md-6 {
+        flex: 0 0 auto;
+        width: 50%;
+      }
+      .product-img-container,
+      .product-img {
+        height: 160px;
+      }
+      .product-title {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation compacte -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="logo-njeeygu">
+          <img src="images/Regilec.png" 
+               alt="NJEEYGU Logo" 
+               class="logo-image">
+          <div class="logo-text">
+            REGILEC
+            <span class="le-grand-jour">Votre Partenaire de Qualité</span>
+          </div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link active" href="boutique.html">Boutique</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+          <li class="nav-item ms-2">
+            <a href="contact.html" class="btn btn-or btn-sm">Rdv</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Boutique -->
+  <div class="hero-boutique">
+    <div class="container">
+      <span class="hero-badge"><i class="fas fa-crown me-2"></i>Produits haute qualité</span>
+      <h1 class="fw-bold">Notre Boutique</h1>
+      <p>Découvrez notre sélection de produits de qualité superieures </p>
+      <div class="d-flex gap-3 mt-4">
+        <a href="#produits" class="btn btn-or">Voir les produits</a>
+        <a href="contact.html" class="btn btn-rouge">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section présentation -->
+ <!-- <div class="presentation-banner">
+    <div class="container">
+      <div class="presentation-content">
+        <div class="presentation-text">
+          <h2>L'art de la réception</h2>
+          <p>Bienvenue dans notre boutique dédiée à l'élégance et au raffinement. Chaque pièce que nous sélectionnons est choisie avec soin pour apporter une touche d'exception à vos célébrations.</p>
+          <p><i class="fas fa-star me-2" style="color: var(--or-eclatant);"></i> Des collections exclusives</p>
+          <p><i class="fas fa-glass-cheers me-2" style="color: var(--or-eclatant);"></i> Pour tous vos événements</p>
+          <p><i class="fas fa-palette me-2" style="color: var(--or-eclatant);"></i> Personnalisation possible</p>
+          
+          <div class="presentation-stats">
+            <div class="stat-item">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Événements</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">200+</div>
+              <div class="stat-label">Produits</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">20 ans</div>
+              <div class="stat-label">d'expertise</div>
+            </div>
+          </div>
+        </div>
+        <div class="presentation-image">
+          <img src="images/22.jpeg" alt="Décoration de table élégante">
+        </div>
+      </div>
+    </div>
+  </div>   -->
+
+  <!-- Filtres -->
+  <div class="filtres-container" id="produits">
+    <div class="container">
+      <div class="text-center">
+        <div class="d-flex flex-wrap justify-content-center" id="filterButtons">
+          <span class="filtre-categorie active" data-category="all">Tous les produits</span>
+          <span class="filtre-categorie" data-category="ballons">Solaire</span>
+          <span class="filtre-categorie" data-category="fleurs">Cable</span>
+          <span class="filtre-categorie" data-category="chaises">Armoire</span>
+          <span class="filtre-categorie" data-category="baches">Cable</span>
+          <span class="filtre-categorie" data-category="vaisselle">Armoire</span>
+          <span class="filtre-categorie" data-category="traditionnelle">Lampe</span>
+          <span class="filtre-categorie" data-category="lumiere">Divers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grille produits - SANS PRIX -->
+  <section class="pb-5">
+    <div class="container" id="productGrid">
+      <!-- Les produits seront générés dynamiquement -->
+    </div>
+  </section>
+
+  
+  <!-- Modal pour demande de devis personnalisé -->
+  <div class="devis-modal" id="devisModal" style="display: none;">
+    <div class="devis-modal-content">
+      <h3><i class="fas fa-file-invoice me-2" style="color: var(--or-eclatant);"></i>Demande de devis personnalisé</h3>
+      <div id="devisProductInfo" class="mb-3 p-3" style="background: #f8f1e0; border-radius: 10px;">
+        <!-- Informations produit affichées dynamiquement -->
+      </div>
+      <div class="form-group">
+        <label>Nom complet *</label>
+        <input type="text" id="devisName" placeholder="Votre nom" required>
+      </div>
+      <div class="form-group">
+        <label>Téléphone *</label>
+        <input type="tel" id="devisPhone" placeholder="77 000 00 00" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="devisEmail" placeholder="votre@email.com">
+      </div>
+      <div class="form-group">
+        <label>Quantité souhaitée</label>
+        <input type="number" id="devisQuantity" min="1" value="1">
+      </div>
+      <div class="form-group">
+        <label>Date de l'événement</label>
+        <input type="date" id="devisEventDate">
+      </div>
+      <div class="form-group">
+        <label>Budget approximatif (FCFA)</label>
+        <input type="text" id="devisBudget" placeholder="Ex: 100000">
+      </div>
+      <div class="form-group">
+        <label>Demande spécifique</label>
+        <textarea id="devisMessage" rows="3" placeholder="Décrivez vos besoins spécifiques..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeDevisModal()">Annuler</button>
+        <button class="btn-submit" onclick="submitDevisRequest()">Envoyer la demande</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter-section">
+    <div class="container">
+      <h3 class="h4 mb-2">Restez informé</h3>
+      <p class="mb-3">Recevez nos dernières collections et offres exclusives</p>
+      <div class="newsletter-form">
+        <input type="email" id="newsletterEmail" placeholder="Votre adresse email">
+        <button onclick="subscribeNewsletter()">S'inscrire</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-3">
+          <div class="logo-njeeygu mb-2">
+            <img src="images/Regilec.png" 
+                 alt="NJEEYGU Logo" 
+                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--or-eclatant);">
+            <span style="color: var(--or-eclatant); font-weight: 600; margin-left: 8px;">REGILEC</span>
+          </div>
+          <p class="small opacity-75">Vous avez le site, nous apportons l'ingénierie. REGILEC ne se contente pas d'auditer vos réseaux, nous concevons des infrastructures électriques fiables, performantes et sécurisées pour vos installations industrielles.</p>
+          <div class="small">
+            <i class="fas fa-map-marker-alt me-1" style="color: var(--or-eclatant);"></i> Dakar, Sénégal<br>
+            <i class="fas fa-phone me-1" style="color: var(--or-eclatant);"></i> +221 77 565 41 22<br>
+            <i class="fas fa-envelope me-1" style="color: var(--or-eclatant);"></i> contact@régilec.com
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <h5 class="footer-title">Liens rapides</h5>
+          <div class="footer-links">
+            <div><a href="index.html">Accueil</a></div>
+            <div><a href="boutique.html">Boutique</a></div>
+            <div><a href="services.html">Services</a></div>
+            <div><a href="apropos.html">À propos</a></div>
+            <div><a href="contact.html">Contact</a></div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <h5 class="footer-title">Suivez-nous</h5>
+          <div class="social-links mb-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+          <p class="small opacity-75 mb-0">© 2026 BCM-GROUPE Sénégal - Tous droits réservés</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Liste des produits avec les 7 catégories - SANS PRIX
+    const productsData = [
+      // Ballons
+      { id: 1, category: 'ballons', name: 'Arche à Ballons Prestige', badge: 'Top', 
+        image: 'images/1.jpeg',
+        desc: 'Structure métallique 2.5m de hauteur, inclut 30 ballons de qualité supérieure.' },
+      { id: 2, category: 'ballons', name: 'Ballons Métallisés Or', badge: '',
+        image: 'images/2.jpeg',
+        desc: 'Lot de 30 ballons, assortis or, rose, argent, avec supports.' },
+      { id: 3, category: 'ballons', name: 'Structure Murale Ballons', badge: 'Nouveau',
+        image: 'images/3.jpeg',
+        desc: 'Pour compositions de ballons, 2x2m démontable et réutilisable.' },
+      
+      // Fleurs
+      { id: 4, category: 'fleurs', name: 'Centre de table Fleurs', badge: 'Nouveau', 
+        image: 'images/4.jpeg',
+        desc: 'Composition florale de luxe avec roses, pivoines et eucalyptus.' },
+      { id: 5, category: 'fleurs', name: 'Bouquet Mariée', badge: 'Sur commande',
+        image: 'images/5.jpeg',
+        desc: 'Bouquet personnalisé selon vos goûts et couleurs préférées.' },
+      { id: 6, category: 'fleurs', name: 'Pétales de Roses', badge: '',
+        image: 'images/6.jpeg',
+        desc: 'Lot de 500 pétales de roses naturelles pour allée et décoration.' },
+      
+      // Chaises
+      { id: 7, category: 'chaises', name: 'Chaise Tiffany Dorée', badge: 'Location',
+        image: 'images/7.jpeg',
+        desc: 'Chaise Tiffany avec housse dorée, location à l\'unité.' },
+      { id: 8, category: 'chaises', name: 'Chaise Napoléon Rouge', badge: 'Location',
+        image: 'images/8.jpeg',
+        desc: 'Chaise Napoléon, finition rouge velours, location à l\'unité.' },
+      { id: 9, category: 'chaises', name: 'Housse de Chaise', badge: '',
+        image: 'images/9.jpeg',
+        desc: 'Housse élastique pour chaise, plusieurs couleurs disponibles.' },
+      
+      // Bâches
+      { id: 10, category: 'baches', name: 'Bâche Fond Scène', badge: 'Imprimable',
+        image: 'images/10.jpeg',
+        desc: 'Bâche 3x3m avec œillets, personnalisable avec votre logo ou message.' },
+      { id: 11, category: 'baches', name: 'Bâche Plastifiée', badge: '',
+        image: 'images/11.jpeg',
+        desc: 'Bâche protection sol 4x5m, résistante pour extérieur.' },
+      { id: 12, category: 'baches', name: 'Bâche Calendrier', badge: 'Collection',
+        image: 'images/12.jpeg',
+        desc: 'Bâche avec motifs traditionnels sénégalais, 2x3m.' },
+      
+      // Vaisselle
+      { id: 13, category: 'vaisselle', name: 'Vaisselle Émeraude', badge: 'Lot',
+        image: 'images/13.jpeg',
+        desc: 'Lot de 12 pièces (assiettes, couverts, verres) couleur vert émeraude.' },
+      { id: 14, category: 'vaisselle', name: 'Vaisselle Dorée', badge: 'Prestige',
+        image: 'images/14.jpeg',
+        desc: 'Lot de 12 pièces, finition dorée, vaisselle de luxe.' },
+      { id: 15, category: 'vaisselle', name: 'Verres à Pied', badge: '',
+        image: 'images/15.jpeg',
+        desc: 'Lot de 6 verres à pied en cristal, gravure possible.' },
+      
+      // Décoration traditionnelle
+      { id: 16, category: 'traditionnelle', name: 'Parure Mariage Traditionnel', badge: 'Authentique',
+        image: 'images/16.jpeg',
+        desc: 'Ensemble complet de décoration traditionnelle sénégalaise (bassin, boubous, accessoires).' },
+      { id: 17, category: 'traditionnelle', name: 'Kora Décorative', badge: 'Artisanat',
+        image: 'images/17.jpeg',
+        desc: 'Kora traditionnelle, pièce décorative pour ambiance authentique.' },
+      { id: 18, category: 'traditionnelle', name: 'Tenture Wax', badge: '',
+        image: 'images/18.jpeg',
+        desc: 'Tenture en wax 2x3m, motifs traditionnels, plusieurs modèles.' },
+      
+      // Lumières
+      { id: 19, category: 'lumiere', name: 'Guirlande Lumineuse Dorée', badge: 'Nouveau',
+        image: 'images/19.jpeg',
+        desc: '5 mètres de guirlande lumineuse LED, 100 ampoules chaudes.' },
+      { id: 20, category: 'lumiere', name: 'Photobooth LED', badge: 'Location',
+        image: 'images/20.jpeg',
+        desc: 'Location à la journée avec fond lumineux et accessoires.' },
+      { id: 21, category: 'lumiere', name: 'Projecteur Ambiance', badge: '',
+        image: 'images/21.jpeg',
+        desc: 'Projecteur LED RGB avec télécommande, 20W, effet disco et ambiance.' }
+    ];
+
+    // Variables globales
+    let currentDevisProduct = null;
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', function() {
+      renderProducts();
+      initEventListeners();
+      addAdminQuickAccess();
+    });
+
+    // Rendu des produits - SANS PRIX
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      let html = '';
+      
+      for (let i = 0; i < productsData.length; i += 4) {
+        html += '<div class="row g-3 mb-3">';
+        
+        for (let j = i; j < i + 4 && j < productsData.length; j++) {
+          const p = productsData[j];
+          const badgeHtml = p.badge ? `<span class="product-badge">${p.badge}</span>` : '';
+          
+          html += `
+            <div class="col-lg-3 col-md-6 product-item" data-category="${p.category}">
+              <div class="product-card" data-id="${p.id}" data-name="${p.name}">
+                ${badgeHtml}
+                <div class="product-img-container">
+                  <img src="${p.image}" class="product-img" alt="${p.name}" loading="lazy">
+                </div>
+                <div class="product-content">
+                  <div class="product-category">${getCategoryLabel(p.category)}</div>
+                  <h3 class="product-title">${p.name}</h3>
+                  <p class="product-desc">${p.desc}</p>
+                  <div class="devis-only-message">
+                    <i class="fas fa-file-invoice me-1"></i> Devis personnalisé
+                  </div>
+                  <button class="btn btn-devis w-100" onclick="openDevisModal(${p.id})">
+                    <i class="fas fa-file-invoice me-2"></i>Demander un devis
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        
+        html += '</div>';
+      }
+      
+      grid.innerHTML = html;
+    }
+
+    function getCategoryLabel(category) {
+      const labels = {
+        'ballons': 'Ballons',
+        'fleurs': 'Fleurs',
+        'chaises': 'Chaises',
+        'baches': 'Bâches',
+        'vaisselle': 'Vaisselle',
+        'traditionnelle': 'Décoration traditionnelle',
+        'lumiere': 'Lumières'
+      };
+      return labels[category] || category;
+    }
+
+    // Filtres
+    const filterButtons = document.querySelectorAll('.filtre-categorie');
+    
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterButtons.forEach(f => f.classList.remove('active'));
+        this.classList.add('active');
+        
+        const category = this.dataset.category;
+        const products = document.querySelectorAll('.product-item');
+        
+        products.forEach(product => {
+          if (category === 'all' || product.dataset.category === category) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Gestion du devis personnalisé
+    window.openDevisModal = function(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if (!product) return;
+      
+      currentDevisProduct = product;
+      
+      const productInfo = document.getElementById('devisProductInfo');
+      productInfo.innerHTML = `
+        <div class="d-flex align-items-center gap-3">
+          <img src="${product.image}" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
+          <div>
+            <h4 class="h6 mb-1">${product.name}</h4>
+            <p class="small mb-0">${product.desc}</p>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('devisModal').style.display = 'flex';
+    };
+
+    window.closeDevisModal = function() {
+      document.getElementById('devisModal').style.display = 'none';
+      currentDevisProduct = null;
+    };
+
+    window.submitDevisRequest = function() {
+      const name = document.getElementById('devisName').value.trim();
+      const phone = document.getElementById('devisPhone').value.trim();
+      
+      if (!name || !phone) {
+        showToast('Veuillez remplir tous les champs obligatoires', 'error');
+        return;
+      }
+
+      if (!currentDevisProduct) return;
+
+      const devisData = {
+        id: 'DEV-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase(),
+        date: new Date().toLocaleString('fr-FR'),
+        timestamp: new Date().toISOString(),
+        type: 'Devis personnalisé',
+        product: {
+          id: currentDevisProduct.id,
+          name: currentDevisProduct.name,
+          category: currentDevisProduct.category
+        },
+        customerInfo: {
+          name: name,
+          phone: phone,
+          email: document.getElementById('devisEmail').value.trim() || 'Non spécifié',
+          quantity: document.getElementById('devisQuantity').value,
+          eventDate: document.getElementById('devisEventDate').value || 'Non spécifiée',
+          budget: document.getElementById('devisBudget').value || 'Non spécifié',
+          message: document.getElementById('devisMessage').value.trim() || ''
+        }
+      };
+
+      // Sauvegarder dans localStorage
+      const devisRequests = JSON.parse(localStorage.getItem('njeeygu_devis') || '[]');
+      devisRequests.push(devisData);
+      localStorage.setItem('njeeygu_devis', JSON.stringify(devisRequests));
+
+      // Envoi WhatsApp pour le devis
+      let message = '*NJEEYGU - DEMANDE DE DEVIS PERSONNALISÉ*%0A%0A';
+      message += `*Produit:* ${currentDevisProduct.name}%0A`;
+      message += `*Catégorie:* ${getCategoryLabel(currentDevisProduct.category)}%0A`;
+      message += `*Client:* ${name}%0A`;
+      message += `*Téléphone:* ${phone}%0A`;
+      message += `*Email:* ${devisData.customerInfo.email}%0A`;
+      message += `*Quantité:* ${devisData.customerInfo.quantity}%0A`;
+      message += `*Date événement:* ${devisData.customerInfo.eventDate}%0A`;
+      message += `*Budget:* ${devisData.customerInfo.budget} FCFA%0A`;
+      
+      if (devisData.customerInfo.message) {
+        message += `%0A*Message:* ${devisData.customerInfo.message}%0A`;
+      }
+      
+      message += `%0A🆔 *Réf:* ${devisData.id}`;
+
+      window.open(`https://wa.me/221775449795?text=${message}`, '_blank');
+
+      // Fermer le modal et réinitialiser
+      closeDevisModal();
+      
+      document.getElementById('devisName').value = '';
+      document.getElementById('devisPhone').value = '';
+      document.getElementById('devisEmail').value = '';
+      document.getElementById('devisQuantity').value = '1';
+      document.getElementById('devisEventDate').value = '';
+      document.getElementById('devisBudget').value = '';
+      document.getElementById('devisMessage').value = '';
+      
+      showToast('Demande de devis envoyée avec succès !', 'success');
+    };
+
+    // Toast notification
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `toast-notification ${type}`;
+      toast.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        ${message}
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideInRight 0.3s reverse';
+        setTimeout(() => {
+          document.body.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+
+    // Newsletter
+    window.subscribeNewsletter = function() {
+      const email = document.getElementById('newsletterEmail').value;
+      if (!email || !email.includes('@')) {
+        showToast('Email invalide', 'error');
+        return;
+      }
+      
+      const subscribers = JSON.parse(localStorage.getItem('njeeygu_subscribers') || '[]');
+      subscribers.push({ email, date: new Date().toISOString() });
+      localStorage.setItem('njeeygu_subscribers', JSON.stringify(subscribers));
+      
+      document.getElementById('newsletterEmail').value = '';
+      showToast('Merci de votre inscription !', 'success');
+    }
+
+    // Event listeners
+    function initEventListeners() {
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeDevisModal();
+        }
+      });
+
+      // Fermer le modal en cliquant sur l'overlay
+      document.getElementById('devisModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeDevisModal();
+        }
+      });
+    }
+
+    // Admin quick access
+    function addAdminQuickAccess() {
+      const adminBtn = document.createElement('div');
+      adminBtn.className = 'admin-badge';
+      adminBtn.innerHTML = '<i class="fas fa-crown me-2"></i>Admin Panel';
+      adminBtn.onclick = () => window.open('admin.html', '_blank');
+      document.body.appendChild(adminBtn);
+    }
+  </script>
+</body>
+</html>

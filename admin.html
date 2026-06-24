@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGILEC · Administration - Gestion complète</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <!-- Icon Logo -->
+  <link rel="shortcut icon" href="images/Regilec.png"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Chart.js pour les statistiques -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- DataTables pour les tableaux avancés -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+  <!-- jsPDF pour générer des PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  <!-- html2canvas pour capture d'écran -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --rouge-profond: #16a5aa;
+      --or-eclatant: #D4AF37;
+      --vert-emeraude: #006B54;
+      --blanc-casse: #FDF5E6;
+      --gris-elegant: #2c2c2c;
+      --ombre-legere: rgba(0, 0, 0, 0.03);
+      --ombre-doree: rgba(212, 175, 55, 0.15);
+      --admin-bg: #f4f4f4;
+      --admin-sidebar: #1e1e2d;
+      --admin-sidebar-hover: #2c2c3f;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--admin-bg);
+      color: var(--gris-elegant);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Layout Admin */
+    .admin-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .admin-sidebar {
+      width: 280px;
+      background: var(--admin-sidebar);
+      color: white;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+    
+    .admin-sidebar::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    .admin-sidebar::-webkit-scrollbar-track {
+      background: #2c2c3f;
+    }
+    
+    .admin-sidebar::-webkit-scrollbar-thumb {
+      background: var(--or-eclatant);
+      border-radius: 10px;
+    }
+    
+    .sidebar-header {
+      padding: 20px 15px;
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      text-align: center;
+    }
+    
+    .sidebar-header h3 {
+      color: var(--or-eclatant);
+      font-size: 1.3rem;
+      margin-bottom: 0.2rem;
+    }
+    
+    .sidebar-header p {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      letter-spacing: 1px;
+    }
+    
+    .sidebar-menu {
+      padding: 20px 0;
+    }
+    
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+      position: relative;
+    }
+    
+    .sidebar-menu a:hover, 
+    .sidebar-menu a.active {
+      background: var(--admin-sidebar-hover);
+      color: var(--or-eclatant);
+      border-left-color: var(--or-eclatant);
+    }
+    
+    .sidebar-menu a i {
+      width: 30px;
+      font-size: 1.1rem;
+    }
+    
+    .sidebar-menu a span {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .notification-badge {
+      position: absolute;
+      right: 15px;
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    
+    .sidebar-menu .menu-divider {
+      height: 1px;
+      background: rgba(212,175,55,0.1);
+      margin: 15px 20px;
+    }
+    
+    /* Main Content */
+    .admin-main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 20px 30px;
+    }
+    
+    /* Top Bar */
+    .admin-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px var(--ombre-legere);
+      margin-bottom: 25px;
+    }
+    
+    .admin-topbar h2 {
+      font-size: 1.5rem;
+      color: var(--rouge-profond);
+      margin: 0;
+    }
+    
+    .admin-user {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .admin-user img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--or-eclatant);
+      object-fit: cover;
+    }
+    
+    .admin-user-info {
+      text-align: right;
+    }
+    
+    .admin-user-info .name {
+      font-weight: 600;
+      color: var(--rouge-profond);
+    }
+    
+    .admin-user-info .role {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    /* Stats Cards */
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 5px 15px var(--ombre-legere);
+      transition: all 0.3s;
+      height: 100%;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px var(--ombre-doree);
+    }
+    
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(212,175,55,0.1);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--or-eclatant);
+    }
+    
+    .stat-info h3 {
+      font-size: 1.5rem;
+      color: var(--rouge-profond);
+      margin-bottom: 0;
+    }
+    
+    .stat-info p {
+      margin: 0;
+      color: #666;
+      font-size: 0.85rem;
+    }
+    
+    /* Tables */
+    .admin-table {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 5px 15px var(--ombre-legere);
+      margin-bottom: 20px;
+    }
+    
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .table-header h4 {
+      color: var(--rouge-profond);
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    
+    .admin-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .admin-table th {
+      text-align: left;
+      padding: 12px 10px;
+      color: var(--rouge-profond);
+      font-weight: 600;
+      font-size: 0.85rem;
+      border-bottom: 2px solid rgba(212,175,55,0.2);
+    }
+    
+    .admin-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+    
+    .admin-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .admin-table tr:hover td {
+      background: rgba(212,175,55,0.05);
+    }
+    
+    .badge-status {
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+    
+    .badge-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .badge-confirmed {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .badge-shipped {
+      background: #cce5ff;
+      color: #004085;
+    }
+    
+    .badge-delivered {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+    
+    .badge-cancelled {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .badge-active {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .badge-inactive {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .badge-paid {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .badge-unpaid {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .badge-devis {
+      background: #cce5ff;
+      color: #004085;
+    }
+    
+    .badge-devis-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .badge-devis-sent {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .badge-devis-cancelled {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .badge-devis-converted {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+    
+    /* Badges de stock */
+    .badge-stock {
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+    
+    .badge-stock-critical {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .badge-stock-low {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    
+    .badge-stock-medium {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    
+    .badge-stock-high {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: #666;
+      transition: all 0.2s;
+      margin: 0 2px;
+    }
+    
+    .action-btn:hover {
+      background: rgba(212,175,55,0.1);
+      color: var(--or-eclatant);
+      transform: scale(1.1);
+    }
+    
+    .action-btn.delete:hover {
+      background: #fee;
+      color: #dc3545;
+    }
+    
+    .action-btn.whatsapp:hover {
+      background: #25d36620;
+      color: #25d366;
+    }
+    
+    .action-btn.pdf:hover {
+      background: #dc354520;
+      color: #dc3545;
+    }
+    
+    .action-btn.add-stock:hover {
+      background: #d4edda;
+      color: #28a745;
+    }
+    
+    .action-btn.convert:hover {
+      background: #d4edda;
+      color: #28a745;
+    }
+    
+    .action-btn.invoice:hover {
+      background: #cce5ff;
+      color: #004085;
+    }
+    
+    /* Forms */
+    .admin-form {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 5px 15px var(--ombre-legere);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: var(--rouge-profond);
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+      display: block;
+    }
+    
+    .form-control, .form-select {
+      padding: 10px 15px;
+      border: 2px solid rgba(212,175,55,0.1);
+      border-radius: 15px;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--or-eclatant);
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(212,175,55,0.25);
+    }
+    
+    /* Stock Input Group */
+    .stock-input-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .stock-input-group input {
+      width: 70px;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    
+    .stock-input-group button {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: none;
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .stock-input-group button:hover {
+      background: var(--rouge-profond);
+      color: white;
+    }
+    
+    /* Progress Bar Stock */
+    .stock-progress {
+      width: 100px;
+      height: 8px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    
+    .stock-progress-bar {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+    
+    .stock-progress-bar.critical {
+      background: #dc3545;
+    }
+    
+    .stock-progress-bar.low {
+      background: #ffc107;
+    }
+    
+    .stock-progress-bar.medium {
+      background: #17a2b8;
+    }
+    
+    .stock-progress-bar.high {
+      background: #28a745;
+    }
+    
+    /* Modal */
+    .modal-content {
+      border-radius: 25px;
+      border: none;
+    }
+    
+    .modal-header {
+      background: linear-gradient(135deg, var(--rouge-profond), #6b0000);
+      color: white;
+      border-radius: 25px 25px 0 0;
+      padding: 20px 25px;
+    }
+    
+    .modal-header .btn-close {
+      filter: brightness(0) invert(1);
+    }
+    
+    .modal-body {
+      padding: 25px;
+    }
+    
+    .modal-footer {
+      padding: 20px 25px;
+      border-top: 1px solid rgba(212,175,55,0.1);
+    }
+    
+    /* Tabs */
+    .admin-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .admin-tab {
+      padding: 10px 20px;
+      background: white;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid rgba(212,175,55,0.1);
+    }
+    
+    .admin-tab:hover {
+      border-color: var(--or-eclatant);
+    }
+    
+    .admin-tab.active {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      font-weight: 600;
+    }
+    
+    /* Login Page */
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--rouge-profond), #2c2c2c);
+    }
+    
+    .login-box {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+    
+    .login-box .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .login-box .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--or-eclatant);
+      object-fit: cover;
+    }
+    
+    .login-box h2 {
+      color: var(--rouge-profond);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    
+    .login-box p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    /* Order Details */
+    .order-details {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+    
+    .order-product-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #ddd;
+    }
+    
+    .order-product-item:last-child {
+      border-bottom: none;
+    }
+    
+    .order-product-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    
+    /* Invoice - Style optimisé pour mobile */
+    .invoice-pdf-mobile {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      font-family: 'Montserrat', sans-serif;
+      color: #000;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    
+    .invoice-header-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--or-eclatant);
+    }
+    
+    .company-info-mobile {
+      width: 100%;
+    }
+    
+    .company-logo-mobile {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--rouge-profond);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .company-logo-mobile i {
+      color: var(--or-eclatant);
+    }
+    
+    .company-contact-mobile {
+      font-size: 10px;
+      color: #666;
+      line-height: 1.3;
+    }
+    
+    .invoice-title-mobile {
+      width: 100%;
+    }
+    
+    .invoice-title-mobile h1 {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--rouge-profond);
+      margin: 0 0 10px 0;
+    }
+    
+    .invoice-number-mobile {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--or-eclatant);
+    }
+    
+    .invoice-details-mobile {
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .client-info-mobile, .order-info-mobile {
+      width: 100%;
+      background: #f8f1e0;
+      padding: 12px;
+      border-radius: 10px;
+    }
+    
+    .section-title-mobile {
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--rouge-profond);
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--or-eclatant);
+    }
+    
+    .invoice-table-mobile {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 10px;
+    }
+    
+    .invoice-table-mobile thead {
+      background: var(--rouge-profond);
+    }
+    
+    .invoice-table-mobile th {
+      padding: 8px 6px;
+      text-align: left;
+      color: white;
+      font-weight: bold;
+      border: none;
+      font-size: 10px;
+    }
+    
+    .invoice-table-mobile td {
+      padding: 6px;
+      border-bottom: 1px solid #ddd;
+      font-size: 10px;
+    }
+    
+    .invoice-table-mobile .text-right {
+      text-align: right;
+    }
+    
+    .invoice-table-mobile .text-center {
+      text-align: center;
+    }
+    
+    .totals-section-mobile {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border: 1px solid var(--or-eclatant);
+    }
+    
+    .total-row-mobile {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      padding: 4px 0;
+      font-size: 11px;
+    }
+    
+    .grand-total-mobile {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--rouge-profond);
+      border-top: 2px solid var(--or-eclatant);
+      border-bottom: none;
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    
+    .footer-mobile {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      font-size: 9px;
+      color: #666;
+      line-height: 1.3;
+    }
+    
+    .stamp-mobile {
+      text-align: center;
+      margin: 20px auto;
+      padding: 15px 25px;
+      border: 2px solid var(--or-eclatant);
+      border-radius: 3px;
+      display: inline-block;
+      transform: rotate(-5deg);
+      background: rgba(212, 175, 55, 0.05);
+      font-size: 10px;
+    }
+    
+    .conditions-mobile {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 3px;
+      font-size: 9px;
+      line-height: 1.3;
+    }
+    
+    .btn-rouge {
+      background: var(--rouge-profond);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    
+    .btn-rouge:hover {
+      background: #6b0000;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .btn-or {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    
+    .btn-or:hover {
+      background: #c4a030;
+      color: var(--rouge-profond);
+      transform: translateY(-2px);
+    }
+    
+    .btn-emeraude {
+      background: var(--vert-emeraude);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    
+    .btn-emeraude:hover {
+      background: #004c3a;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    /* TVA Badge */
+    .tva-badge {
+      background: var(--vert-emeraude);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    
+    .price-without-tva {
+      color: #666;
+      font-size: 0.8rem;
+      text-decoration: line-through;
+      margin-right: 5px;
+    }
+    
+    .price-with-tva {
+      color: var(--rouge-profond);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Table des stocks faibles */
+    .low-stock-alert {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    /* Responsive pour mobile */
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        width: 70px;
+      }
+      
+      .sidebar-header h3,
+      .sidebar-header p,
+      .sidebar-menu a span {
+        display: none;
+      }
+      
+      .sidebar-menu a i {
+        width: 100%;
+        text-align: center;
+        font-size: 1.3rem;
+      }
+      
+      .notification-badge {
+        right: 5px;
+        font-size: 0.6rem;
+        padding: 1px 4px;
+      }
+      
+      .admin-main {
+        margin-left: 70px;
+        padding: 15px;
+      }
+      
+      .invoice-pdf-mobile {
+        padding: 15px;
+        font-size: 11px;
+      }
+      
+      .invoice-table-mobile {
+        font-size: 9px;
+      }
+      
+      .invoice-table-mobile th,
+      .invoice-table-mobile td {
+        padding: 5px 4px;
+        font-size: 9px;
+      }
+      
+      .invoice-title-mobile h1 {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .admin-main {
+        padding: 10px;
+      }
+      
+      .admin-topbar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      
+      .admin-user {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .invoice-pdf-mobile {
+        padding: 10px;
+        font-size: 10px;
+      }
+      
+      .invoice-table-mobile {
+        font-size: 8px;
+      }
+      
+      .invoice-title-mobile h1 {
+        font-size: 18px;
+      }
+    }
+    
+    /* Print styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .invoice-pdf-mobile, .invoice-pdf-mobile * {
+        visibility: visible;
+      }
+      .invoice-pdf-mobile {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 10mm !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        font-size: 10px !important;
+      }
+      
+      .invoice-table-mobile {
+        font-size: 9px !important;
+      }
+      
+      .invoice-table-mobile th,
+      .invoice-table-mobile td {
+        padding: 4px 3px !important;
+        font-size: 9px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page de connexion -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <div class="logo">
+        <img src="images/log1.png" alt="NJEEYGU" onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&w=200&h=200&fit=crop';">
+      </div>
+      <h2>Administration</h2>
+      <p>Connectez-vous pour accéder au tableau de bord</p>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label class="form-label">Nom d'utilisateur</label>
+          <input type="text" class="form-control" id="username" placeholder="Votre identifiant.." required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-rouge w-100 py-2">Se connecter</button>
+      </form>
+      
+    </div>
+  </div>
+
+  <!-- Interface Admin -->
+  <div id="adminInterface" style="display: none;">
+    <div class="admin-wrapper">
+      <!-- Sidebar -->
+      <div class="admin-sidebar">
+        <div class="sidebar-header">
+          <h3>NJEEYGU</h3>
+          <p>ADMIN PANEL</p>
+        </div>
+        
+        <div class="sidebar-menu">
+          <a href="#" class="active" onclick="showSection('dashboard', event)">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Tableau de bord</span>
+          </a>
+          <a href="#" onclick="showSection('devis', event)">
+            <i class="fas fa-file-invoice"></i>
+            <span>Demandes de devis</span>
+            <span class="notification-badge" id="devisPendingBadge"><span id="statTotalDevis">0</span></span>
+          </a>
+          <a href="#" onclick="showSection('produits', event)">
+            <i class="fas fa-box"></i>
+            <span>Produits</span>
+            <span class="notification-badge" id="lowStockBadge"><span id="totalProducts">0</span></span>
+          </a>
+          <a href="#" onclick="showSection('stock', event)">
+            <i class="fas fa-warehouse"></i>
+            <span>Gestion Stock</span>
+            <span class="notification-badge" id="stockAlertBadge"><span id="statTotalStock">0</span></span>
+          </a>
+          <a href="#" onclick="showSection('factures', event)">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Factures</span>
+          </a>
+          <a href="#" onclick="showSection('clients', event)">
+            <i class="fas fa-users"></i>
+            <span>Clients</span>
+          </a>
+          <a href="#" onclick="showSection('services', event)">
+            <i class="fas fa-crown"></i>
+            <span>Services</span>
+          </a>
+          <a href="#" onclick="showSection('equipe', event)">
+            <i class="fas fa-user-tie"></i>
+            <span>Équipe</span>
+          </a>
+          <a href="#" onclick="showSection('salaires', event)">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Salaires</span>
+            <span class="notification-badge" id="salariesBadge">0</span>
+          </a>
+          
+          <div class="menu-divider"></div>
+          
+          <a href="#" onclick="showSection('parametres', event)">
+            <i class="fas fa-cog"></i>
+            <span>Paramètres</span>
+          </a>
+          <a href="#" onclick="handleLogout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Déconnexion</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="admin-main">
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+          <h2 id="pageTitle">Tableau de bord</h2>
+          <div class="admin-user">
+            <div class="admin-user-info">
+              <div class="name" id="adminName">Mme Sarr</div>
+              <div class="role" id="adminRole">Administrateur</div>
+            </div>
+            <img src="images/log1.png" alt="Admin" onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&w=200&h=200&fit=crop';">
+          </div>
+        </div>
+        
+        <!-- Notification Toast -->
+        <div id="notificationToast" class="notification-toast" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999; background: white; border-radius: 15px; padding: 15px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border-left: 4px solid var(--or-eclatant);">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-shopping-cart me-2" style="color: var(--or-eclatant);"></i>
+            <div>
+              <strong id="notificationTitle">Nouvelle demande</strong>
+              <p id="notificationMessage" class="small mb-0">Une nouvelle demande a été reçue</p>
+            </div>
+            <button class="btn-close ms-3" onclick="closeNotification()"></button>
+          </div>
+        </div>
+        
+        <!-- ==================== DASHBOARD ==================== -->
+        <div id="section-dashboard" class="admin-section">
+          <!-- Stats Cards -->
+          <div class="row g-4 mb-4">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statDevis">0</h3>
+                  <p>Demandes de devis</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statProduits">0</h3>
+                  <p>Produits</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statFactures">0</h3>
+                  <p>Factures</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statClients">0</h3>
+                  <p>Clients</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Alerte stock faible -->
+          <div id="lowStockAlert" class="low-stock-alert" style="display: none;">
+            <strong><i class="fas fa-exclamation-triangle me-2" style="color: #856404;"></i>Produits avec stock faible :</strong>
+            <span id="lowStockCount">0</span> produit(s) nécessitent une attention
+          </div>
+          
+          <!-- Dernières demandes de devis -->
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Dernières demandes de devis</h4>
+              <a href="#" onclick="showSection('devis', event)" class="btn btn-or btn-sm">Voir tout</a>
+            </div>
+            <table id="recentDevisTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Référence</th>
+                  <th>Client</th>
+                  <th>Produit</th>
+                  <th>Téléphone</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recentDevisList">
+                <!-- Les devis seront insérés ici dynamiquement -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Dernières factures -->
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Dernières factures</h4>
+              <a href="#" onclick="showSection('factures', event)" class="btn btn-or btn-sm">Voir tout</a>
+            </div>
+            <table id="recentInvoicesTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>N° Facture</th>
+                  <th>Client</th>
+                  <th>Montant TTC</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recentInvoicesList">
+                <!-- Les factures seront insérées ici -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- ==================== DEMANDES DE DEVIS ==================== -->
+        <div id="section-devis" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="filterDevis('all', event)">Toutes (<span id="devisCountAll">0</span>)</div>
+            <div class="admin-tab" onclick="filterDevis('pending', event)">En attente (<span id="devisCountPending">0</span>)</div>
+            <div class="admin-tab" onclick="filterDevis('sent', event)">Devis envoyés (<span id="devisCountSent">0</span>)</div>
+            <div class="admin-tab" onclick="filterDevis('converted', event)">Converties (<span id="devisCountConverted">0</span>)</div>
+            <div class="admin-tab" onclick="filterDevis('cancelled', event)">Annulées (<span id="devisCountCancelled">0</span>)</div>
+          </div>
+          
+          <div class="row g-4 mb-4">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statTotalDevis">0</h3>
+                  <p>Total demandes</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-clock" style="color: #ffc107;"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statPendingDevis">0</h3>
+                  <p>En attente</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statSentDevis">0</h3>
+                  <p>Devis envoyés</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statConversionRate">0%</h3>
+                  <p>Taux de conversion</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Gestion des demandes de devis</h4>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="searchDevis" class="form-control" placeholder="Rechercher..." style="width: 250px;">
+                </div>
+                <button class="btn btn-or btn-sm" onclick="exportDevis()">
+                  <i class="fas fa-download me-1"></i> Exporter
+                </button>
+                <button class="btn btn-rouge btn-sm" onclick="generateDevisReport()">
+                  <i class="fas fa-file-pdf me-1"></i> Rapport
+                </button>
+              </div>
+            </div>
+            <table id="devisTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Référence</th>
+                  <th>Date</th>
+                  <th>Client</th>
+                  <th>Téléphone</th>
+                  <th>Email</th>
+                  <th>Produit</th>
+                  <th>Quantité</th>
+                  <th>Date événement</th>
+                  <th>Budget</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="devisList">
+                <!-- Les demandes de devis seront insérées ici -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- ==================== PRODUITS ==================== -->
+        <div id="section-produits" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="showProductsTab('list', event)">Liste des produits</div>
+            <div class="admin-tab" onclick="showProductsTab('add', event)">Ajouter un produit</div>
+            <div class="admin-tab" onclick="showProductsTab('categories', event)">Catégories</div>
+          </div>
+          
+          <div id="products-list" class="products-tab-content">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Tous les produits (<span id="totalProducts">0</span>) <span class="tva-badge">TVA 18% incluse</span></h4>
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="searchProduct" class="form-control" placeholder="Rechercher un produit..." style="width: 250px;">
+                </div>
+              </div>
+              <table id="productsTable" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
+                    <th>Prix HT</th>
+                    <th>TVA (18%)</th>
+                    <th>Prix TTC</th>
+                    <th>Stock</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="productsList">
+                  <!-- Les produits seront insérés ici -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div id="products-add" class="products-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Ajouter un nouveau produit <span class="tva-badge">TVA 18%</span></h4>
+              <form id="addProductForm" onsubmit="addProduct(event)">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nom du produit *</label>
+                      <input type="text" class="form-control" id="productName" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Catégorie *</label>
+                      <select class="form-select" id="productCategory" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="table">Art de la table</option>
+                        <option value="lumiere">Lumières</option>
+                        <option value="mariage">Mariage</option>
+                        <option value="ballon">Ballons</option>
+                        <option value="deco">Décoration</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Prix HT (FCFA) *</label>
+                      <input type="number" class="form-control" id="productPriceHT" required onchange="updatePriceTTC()">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>TVA (18%)</label>
+                      <input type="text" class="form-control" id="productTVA" value="18%" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Prix TTC (FCFA)</label>
+                      <input type="text" class="form-control" id="productPriceTTC" readonly>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Stock initial *</label>
+                      <input type="number" class="form-control" id="productStock" required>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Stock minimum d'alerte</label>
+                      <input type="number" class="form-control" id="productMinStock" value="5">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Emplacement/Rangement</label>
+                      <input type="text" class="form-control" id="productLocation" placeholder="Ex: Aisle 3, Rayon 2">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Statut</label>
+                      <select class="form-select" id="productStatus">
+                        <option value="active">Actif</option>
+                        <option value="inactive">Inactif</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-rouge">Ajouter le produit</button>
+              </form>
+            </div>
+          </div>
+          
+          <div id="products-categories" class="products-tab-content" style="display: none;">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Catégories</h4>
+                <button class="btn btn-or btn-sm" onclick="showAddCategoryModal()">
+                  <i class="fas fa-plus me-1"></i> Ajouter
+                </button>
+              </div>
+              <table id="categoriesTable" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Nombre de produits</th>
+                    <th>Valeur totale du stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="categoriesList">
+                  <!-- Les catégories seront insérées ici -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ==================== GESTION DES STOCKS ==================== -->
+        <div id="section-stock" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="filterStock('all', event)">Tous les stocks (<span id="stockCountAll">0</span>)</div>
+            <div class="admin-tab" onclick="filterStock('critical', event)">Stock critique (<span id="stockCountCritical">0</span>)</div>
+            <div class="admin-tab" onclick="filterStock('low', event)">Stock faible (<span id="stockCountLow">0</span>)</div>
+            <div class="admin-tab" onclick="filterStock('medium', event)">Stock moyen (<span id="stockCountMedium">0</span>)</div>
+            <div class="admin-tab" onclick="filterStock('high', event)">Stock élevé (<span id="stockCountHigh">0</span>)</div>
+          </div>
+          
+          <div class="row g-4 mb-4">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-boxes"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statTotalStock">0</h3>
+                  <p>Unités en stock</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-exclamation-triangle" style="color: #dc3545;"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statCriticalStock">0</h3>
+                  <p>Stock critique</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statStockValue">0</h3>
+                  <p>Valeur totale TTC</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-truck"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statMouvements">0</h3>
+                  <p>Mouvements (30j)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Gestion des stocks <span class="tva-badge">TVA 18% incluse</span></h4>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-emeraude btn-sm" onclick="showAddStockModal()">
+                  <i class="fas fa-plus me-1"></i> Nouveau stock
+                </button>
+                <button class="btn btn-or btn-sm" onclick="exportStockReport()">
+                  <i class="fas fa-download me-1"></i> Exporter
+                </button>
+                <button class="btn btn-rouge btn-sm" onclick="showBulkStockModal()">
+                  <i class="fas fa-edit me-1"></i> Mise à jour groupée
+                </button>
+              </div>
+            </div>
+            <table id="stockTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Produit</th>
+                  <th>Catégorie</th>
+                  <th>Prix HT</th>
+                  <th>Prix TTC</th>
+                  <th>Stock actuel</th>
+                  <th>Stock minimum</th>
+                  <th>Statut stock</th>
+                  <th>Emplacement</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="stockList">
+                <!-- Les produits seront insérés ici -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Historique des mouvements de stock -->
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Derniers mouvements de stock</h4>
+              <button class="btn btn-or btn-sm" onclick="showStockMovementModal()">
+                <i class="fas fa-plus me-1"></i> Nouveau mouvement
+              </button>
+            </div>
+            <table id="stockMovementsTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Produit</th>
+                  <th>Type</th>
+                  <th>Quantité</th>
+                  <th>Stock après</th>
+                  <th>Raison</th>
+                  <th>Utilisateur</th>
+                </tr>
+              </thead>
+              <tbody id="stockMovementsList">
+                <!-- Les mouvements seront insérés ici -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- ==================== FACTURES ==================== -->
+        <div id="section-factures" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="filterInvoices('all', event)">Toutes les factures (<span id="invoicesCountAll">0</span>)</div>
+            <div class="admin-tab" onclick="filterInvoices('paid', event)">Payées (<span id="invoicesCountPaid">0</span>)</div>
+            <div class="admin-tab" onclick="filterInvoices('unpaid', event)">Impayées (<span id="invoicesCountUnpaid">0</span>)</div>
+          </div>
+          
+          <div class="row g-4 mb-4">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statTotalInvoices">0</h3>
+                  <p>Total factures</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statPaidInvoices">0</h3>
+                  <p>Payées</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-clock" style="color: #ffc107;"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statUnpaidInvoices">0</h3>
+                  <p>Impayées</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statTotalAmount">0</h3>
+                  <p>Montant total TTC</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Gestion des factures <span class="tva-badge">TVA 18%</span></h4>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="searchInvoice" class="form-control" placeholder="Rechercher..." style="width: 250px;">
+                </div>
+                <button class="btn btn-or btn-sm" onclick="showAddInvoiceModal()">
+                  <i class="fas fa-plus me-1"></i> Nouvelle facture
+                </button>
+                <button class="btn btn-rouge btn-sm" onclick="generateInvoiceReport()">
+                  <i class="fas fa-file-pdf me-1"></i> Rapport
+                </button>
+              </div>
+            </div>
+            <table id="invoicesTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>N° Facture</th>
+                  <th>Client</th>
+                  <th>Téléphone</th>
+                  <th>Email</th>
+                  <th>Montant HT</th>
+                  <th>TVA (18%)</th>
+                  <th>Montant TTC</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesList">
+                <!-- Les factures seront insérées ici -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- ==================== CLIENTS ==================== -->
+        <div id="section-clients" class="admin-section" style="display: none;">
+          <div class="row g-4 mb-4">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statTotalClients">0</h3>
+                  <p>Total clients</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statClientsWithDevis">0</h3>
+                  <p>Avec demandes</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statClientsWithInvoices">0</h3>
+                  <p>Avec factures</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statTotalSpent">0</h3>
+                  <p>Total dépensé</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="admin-table">
+            <div class="table-header">
+              <h4>Liste des clients</h4>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="searchClient" class="form-control" placeholder="Rechercher un client..." style="width: 250px;">
+                </div>
+                <button class="btn btn-or btn-sm" onclick="showAddClientModal()">
+                  <i class="fas fa-user-plus me-1"></i> Nouveau client
+                </button>
+                <button class="btn btn-rouge btn-sm" onclick="exportClients()">
+                  <i class="fas fa-download me-1"></i> Exporter
+                </button>
+              </div>
+            </div>
+            <table id="clientsTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Téléphone</th>
+                  <th>Email</th>
+                  <th>Demandes devis</th>
+                  <th>Factures</th>
+                  <th>Total dépensé</th>
+                  <th>Dernière activité</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="clientsList">
+                <!-- Les clients seront insérés ici -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- ==================== SERVICES ==================== -->
+        <div id="section-services" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="showServicesTab('list', event)">Liste des services</div>
+            <div class="admin-tab" onclick="showServicesTab('add', event)">Ajouter un service</div>
+          </div>
+          
+          <div id="services-list" class="services-tab-content">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Services proposés</h4>
+                <button class="btn btn-or btn-sm" onclick="showServicesTab('add', event)">
+                  <i class="fas fa-plus me-1"></i> Nouveau service
+                </button>
+              </div>
+              <table id="servicesTable" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Prix HT</th>
+                    <th>TVA (18%)</th>
+                    <th>Prix TTC</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="servicesList">
+                  <!-- Les services seront insérés ici -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div id="services-add" class="services-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Ajouter un service</h4>
+              <form id="addServiceForm" onsubmit="addService(event)">
+                <div class="form-group">
+                  <label>Nom du service *</label>
+                  <input type="text" class="form-control" id="serviceName" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea class="form-control" id="serviceDescription" rows="3"></textarea>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Prix HT (FCFA) *</label>
+                      <input type="number" class="form-control" id="servicePriceHT" required onchange="updateServicePriceTTC()">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Prix TTC (FCFA)</label>
+                      <input type="text" class="form-control" id="servicePriceTTC" readonly>
+                    </div>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-rouge">Ajouter le service</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ==================== ÉQUIPE ==================== -->
+        <div id="section-equipe" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="showTeamTab('list', event)">Membres de l'équipe</div>
+            <div class="admin-tab" onclick="showTeamTab('add', event)">Ajouter un membre</div>
+          </div>
+          
+          <div id="team-list" class="team-tab-content">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Membres de l'équipe</h4>
+                <button class="btn btn-or btn-sm" onclick="showTeamTab('add', event)">
+                  <i class="fas fa-user-plus me-1"></i> Ajouter un membre
+                </button>
+              </div>
+              <table id="teamTable" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>Nom</th>
+                    <th>Poste</th>
+                    <th>Bio</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="teamList">
+                  <!-- Les membres de l'équipe seront insérés ici -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div id="team-add" class="team-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Ajouter un membre à l'équipe</h4>
+              <form id="addTeamMemberForm" onsubmit="addTeamMember(event)">
+                <div class="form-group">
+                  <label>Nom complet *</label>
+                  <input type="text" class="form-control" id="memberName" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Poste *</label>
+                  <input type="text" class="form-control" id="memberPosition" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>Bio / Description</label>
+                  <textarea class="form-control" id="memberBio" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label>Photo URL</label>
+                  <input type="url" class="form-control" id="memberPhoto" placeholder="https://...">
+                </div>
+                
+                <button type="submit" class="btn btn-rouge">Ajouter le membre</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ==================== SALAIRES ==================== -->
+        <div id="section-salaires" class="admin-section" style="display: none;">
+          <!-- En-tête avec statistiques -->
+          <div class="row g-4 mb-4">
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statEmployes">0</h3>
+                  <p>Employés</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statMasseSalariale">0</h3>
+                  <p>Masse salariale</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statPaiementsMois">0</h3>
+                  <p>Paiements ce mois</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-info">
+                  <h3 id="statProchainPaiement">0</h3>
+                  <p>Jours avant paie</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs de navigation -->
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="showSalariesTab('liste', event)">Liste des employés</div>
+            <div class="admin-tab" onclick="showSalariesTab('paiements', event)">Historique des paiements</div>
+            <div class="admin-tab" onclick="showSalariesTab('ajouter', event)">Ajouter un employé</div>
+            <div class="admin-tab" onclick="showSalariesTab('bulletins', event)">Bulletins de salaire</div>
+          </div>
+
+          <!-- Onglet : Liste des employés -->
+          <div id="salaries-liste" class="salaries-tab-content">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Gestion des employés et salaires</h4>
+                <div style="display: flex; gap: 10px;">
+                  <button class="btn btn-or btn-sm" onclick="exportSalaries()">
+                    <i class="fas fa-download me-1"></i> Exporter
+                  </button>
+                  <button class="btn btn-rouge btn-sm" onclick="generatePayroll()">
+                    <i class="fas fa-calculator me-1"></i> Générer la paie
+                  </button>
+                </div>
+              </div>
+              
+              <table id="salariesTable" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>Employé</th>
+                    <th>Poste</th>
+                    <th>Salaire de base</th>
+                    <th>Prime</th>
+                    <th>Salaire total</th>
+                    <th>Date d'embauche</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="salariesList">
+                  <!-- Les employés seront insérés ici dynamiquement -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Graphique de répartition des salaires -->
+            <div class="row g-4 mt-2">
+              <div class="col-md-6">
+                <div class="chart-container">
+                  <h4 style="color: var(--rouge-profond); margin-bottom: 15px;">Répartition des salaires</h4>
+                  <canvas id="salariesChart" style="width: 100%; height: 220px;"></canvas>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="chart-container">
+                  <h4 style="color: var(--rouge-profond); margin-bottom: 15px;">Évolution masse salariale</h4>
+                  <canvas id="payrollEvolutionChart" style="width: 100%; height: 220px;"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Onglet : Historique des paiements -->
+          <div id="salaires-paiements" class="salaries-tab-content" style="display: none;">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Historique des paiements</h4>
+                <div class="d-flex gap-2">
+                  <select class="form-select form-select-sm" style="width: 150px;" id="paymentMonthFilter" onchange="filterPaymentsByMonth()">
+                    <option value="">Tous les mois</option>
+                    <option value="2026-01">Janvier 2026</option>
+                    <option value="2026-02">Février 2026</option>
+                    <option value="2026-03">Mars 2026</option>
+                  </select>
+                  <button class="btn btn-or btn-sm" onclick="exportPayments()">
+                    <i class="fas fa-download me-1"></i> Exporter
+                  </button>
+                </div>
+              </div>
+              
+              <table id="paymentsTable" class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Employé</th>
+                    <th>Poste</th>
+                    <th>Période</th>
+                    <th>Salaire de base</th>
+                    <th>Prime</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="paymentsList">
+                  <!-- Les paiements seront insérés ici -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Onglet : Ajouter un employé -->
+          <div id="salaires-ajouter" class="salaries-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Ajouter un nouvel employé</h4>
+              <form id="addEmployeeForm" onsubmit="addEmployee(event)">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nom complet *</label>
+                      <input type="text" class="form-control" id="employeeName" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Poste *</label>
+                      <input type="text" class="form-control" id="employeePosition" required>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Salaire de base (FCFA) *</label>
+                      <input type="number" class="form-control" id="employeeBaseSalary" required>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Prime par défaut (FCFA)</label>
+                      <input type="number" class="form-control" id="employeeDefaultBonus" value="0">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Date d'embauche *</label>
+                      <input type="date" class="form-control" id="employeeHireDate" required>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Téléphone</label>
+                      <input type="text" class="form-control" id="employeePhone" placeholder="77 123 45 67">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="email" class="form-control" id="employeeEmail" placeholder="employe@email.com">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Numéro de compte bancaire</label>
+                      <input type="text" class="form-control" id="employeeBankAccount" placeholder="SN 12345 67890">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Statut</label>
+                      <select class="form-select" id="employeeStatus">
+                        <option value="actif">Actif</option>
+                        <option value="inactif">Inactif</option>
+                        <option value="conge">En congé</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Notes / Commentaires</label>
+                  <textarea class="form-control" id="employeeNotes" rows="2"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-rouge">Ajouter l'employé</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Onglet : Bulletins de salaire -->
+          <div id="salaires-bulletins" class="salaries-tab-content" style="display: none;">
+            <div class="admin-table">
+              <div class="table-header">
+                <h4>Génération des bulletins de salaire</h4>
+                <button class="btn btn-or btn-sm" onclick="generateAllPayslips()">
+                  <i class="fas fa-file-pdf me-1"></i> Générer tous les bulletins
+                </button>
+              </div>
+              
+              <table class="display nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Période</th>
+                    <th>Employé</th>
+                    <th>Salaire</th>
+                    <th>Date génération</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="payslipsList">
+                  <!-- Les bulletins seront insérés ici dynamiquement -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ==================== PARAMÈTRES ==================== -->
+        <div id="section-parametres" class="admin-section" style="display: none;">
+          <div class="admin-tabs">
+            <div class="admin-tab active" onclick="showSettingsTab('general', event)">Général</div>
+            <div class="admin-tab" onclick="showSettingsTab('users', event)">Utilisateurs</div>
+            <div class="admin-tab" onclick="showSettingsTab('notifications', event)">Notifications</div>
+            <div class="admin-tab" onclick="showSettingsTab('payments', event)">Paiements</div>
+          </div>
+          
+          <div id="settings-general" class="settings-tab-content">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Paramètres généraux</h4>
+              <form id="settingsForm" onsubmit="saveSettings(event)">
+                <div class="form-group">
+                  <label>Nom de l'entreprise</label>
+                  <input type="text" class="form-control" id="companyName" value="NJEEYGU - Le Grand Jour">
+                </div>
+                
+                <div class="form-group">
+                  <label>Email de contact</label>
+                  <input type="email" class="form-control" id="companyEmail" value="contact@njeeygu.sn">
+                </div>
+                
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="text" class="form-control" id="companyPhone" value="+221 77 544 97 95">
+                </div>
+                
+                <div class="form-group">
+                  <label>Adresse</label>
+                  <input type="text" class="form-control" id="companyAddress" value="123 Rue Principale, Saint-Louis">
+                </div>
+                
+                <div class="form-group">
+                  <label>Numéro WhatsApp</label>
+                  <input type="text" class="form-control" id="companyWhatsapp" value="221775449795">
+                </div>
+                
+                <div class="form-group">
+                  <label>Devise</label>
+                  <select class="form-select" id="companyCurrency">
+                    <option value="FCFA" selected>FCFA</option>
+                    <option value="EUR">Euro</option>
+                    <option value="USD">Dollar</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label>Taux de TVA (%)</label>
+                  <input type="number" class="form-control" id="tvaRate" value="18" readonly>
+                  <small class="text-muted">Taux fixe à 18%</small>
+                </div>
+                
+                <div class="form-group">
+                  <label>Seuil d'alerte stock par défaut</label>
+                  <input type="number" class="form-control" id="defaultStockAlert" value="5">
+                </div>
+                
+                <button type="submit" class="btn btn-rouge">Enregistrer les modifications</button>
+              </form>
+            </div>
+          </div>
+          
+          <div id="settings-users" class="settings-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Gestion des utilisateurs</h4>
+              <p class="text-muted">Fonctionnalité à venir...</p>
+            </div>
+          </div>
+          
+          <div id="settings-notifications" class="settings-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Paramètres des notifications</h4>
+              <p class="text-muted">Fonctionnalité à venir...</p>
+            </div>
+          </div>
+          
+          <div id="settings-payments" class="settings-tab-content" style="display: none;">
+            <div class="admin-form">
+              <h4 style="color: var(--rouge-profond); margin-bottom: 20px;">Paramètres de paiement</h4>
+              <p class="text-muted">Fonctionnalité à venir...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Détails Devis -->
+  <div class="modal fade" id="devisDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Détails de la demande de devis <span id="modalDevisId"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 style="color: var(--rouge-profond);">Informations client</h6>
+              <p><strong>Nom :</strong> <span id="modalDevisName"></span></p>
+              <p><strong>Téléphone :</strong> <span id="modalDevisPhone"></span></p>
+              <p><strong>Email :</strong> <span id="modalDevisEmail"></span></p>
+            </div>
+            <div class="col-md-6">
+              <h6 style="color: var(--rouge-profond);">Détails de la demande</h6>
+              <p><strong>Date demande :</strong> <span id="modalDevisDate"></span></p>
+              <p><strong>Quantité :</strong> <span id="modalDevisQuantity"></span></p>
+              <p><strong>Date événement :</strong> <span id="modalDevisEventDate"></span></p>
+              <p><strong>Budget :</strong> <span id="modalDevisBudget"></span></p>
+            </div>
+          </div>
+          
+          <div class="row mt-3">
+            <div class="col-12">
+              <h6 style="color: var(--rouge-profond);">Produit concerné</h6>
+              <div id="modalDevisProduct" class="p-3" style="background: #f8f1e0; border-radius: 10px;">
+                <!-- Informations produit -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="row mt-3">
+            <div class="col-12">
+              <h6 style="color: var(--rouge-profond);">Message du client</h6>
+              <p id="modalDevisMessage" class="p-3" style="background: #f9f9f9; border-radius: 10px;"></p>
+            </div>
+          </div>
+          
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label><strong>Statut du devis :</strong></label>
+              <select id="modalDevisStatusSelect" class="form-select" onchange="updateDevisStatus(this.value)">
+                <option value="pending">En attente</option>
+                <option value="sent">Devis envoyé</option>
+                <option value="converted">Convertie en facture</option>
+                <option value="cancelled">Annulée</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label><strong>Notes internes :</strong></label>
+              <textarea id="modalDevisNotes" class="form-control" rows="2" placeholder="Ajouter une note..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-emeraude" onclick="convertDevisToInvoice()">
+            <i class="fas fa-file-invoice-dollar me-2"></i>Générer facture
+          </button>
+          <button type="button" class="btn btn-or" onclick="sendDevisQuote()">
+            <i class="fab fa-whatsapp me-2"></i>Envoyer devis
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Facture -->
+  <div class="modal fade" id="addInvoiceModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Créer une nouvelle facture</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addInvoiceForm" onsubmit="addInvoice(event)">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Client *</label>
+                  <select class="form-select" id="invoiceClient" required onchange="updateClientInfo()">
+                    <option value="">Sélectionnez un client</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nouveau client ?</label>
+                  <button type="button" class="btn btn-or btn-sm" onclick="showAddClientModal()">
+                    <i class="fas fa-user-plus me-1"></i> Ajouter
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="text" class="form-control" id="invoicePhone" readonly>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" id="invoiceEmail" readonly>
+                </div>
+              </div>
+            </div>
+            
+            <h5 class="mt-4" style="color: var(--rouge-profond);">Articles</h5>
+            <div id="invoiceItems">
+              <div class="row mb-3 invoice-item">
+                <div class="col-md-5">
+                  <select class="form-select" name="productId" required onchange="updateItemPrice(this)">
+                    <option value="">Sélectionnez un produit</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <input type="number" class="form-control" name="quantity" placeholder="Quantité" min="1" value="1" required>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" class="form-control" name="price" placeholder="Prix HT" readonly>
+                </div>
+                <div class="col-md-1">
+                  <button type="button" class="action-btn delete" onclick="removeInvoiceItem(this)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn-or btn-sm mb-4" onclick="addInvoiceItem()">
+              <i class="fas fa-plus me-1"></i> Ajouter un article
+            </button>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Date de facture</label>
+                  <input type="date" class="form-control" id="invoiceDate">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Date d'échéance</label>
+                  <input type="date" class="form-control" id="invoiceDueDate">
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Statut de paiement</label>
+                  <select class="form-select" id="invoicePaymentStatus">
+                    <option value="unpaid">Impayée</option>
+                    <option value="paid">Payée</option>
+                    <option value="partial">Paiement partiel</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mode de paiement</label>
+                  <select class="form-select" id="invoicePaymentMethod">
+                    <option value="especes">Espèces</option>
+                    <option value="carte">Carte bancaire</option>
+                    <option value="virement">Virement</option>
+                    <option value="wave">Wave</option>
+                    <option value="orange_money">Orange Money</option>
+                    <option value="free_money">Free Money</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-end mt-4">
+              <button type="submit" class="btn btn-rouge">Créer la facture</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Client -->
+  <div class="modal fade" id="addClientModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un nouveau client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addClientForm" onsubmit="addClient(event)">
+            <div class="form-group">
+              <label>Nom complet *</label>
+              <input type="text" class="form-control" id="clientName" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Téléphone *</label>
+              <input type="text" class="form-control" id="clientPhone" placeholder="77 123 45 67" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control" id="clientEmail" placeholder="client@email.com">
+            </div>
+            
+            <div class="form-group">
+              <label>Adresse</label>
+              <textarea class="form-control" id="clientAddress" rows="2"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-rouge">Ajouter le client</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Membre Équipe -->
+  <div class="modal fade" id="addTeamMemberModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un membre à l'équipe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addTeamMemberForm" onsubmit="addTeamMember(event)">
+            <div class="form-group">
+              <label>Nom complet *</label>
+              <input type="text" class="form-control" id="memberName" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Poste *</label>
+              <input type="text" class="form-control" id="memberPosition" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Bio / Description</label>
+              <textarea class="form-control" id="memberBio" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label>Photo URL</label>
+              <input type="url" class="form-control" id="memberPhoto" placeholder="https://...">
+            </div>
+            
+            <button type="submit" class="btn btn-rouge">Ajouter le membre</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Gestion Stock -->
+  <div class="modal fade" id="stockManagementModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Gérer le stock - <span id="stockModalProductName"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="stockModalProductId">
+          
+          <div class="form-group">
+            <label>Stock actuel</label>
+            <input type="number" class="form-control" id="stockModalCurrentStock" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label>Stock minimum d'alerte</label>
+            <input type="number" class="form-control" id="stockModalMinStock">
+          </div>
+          
+          <div class="form-group">
+            <label>Type d'opération</label>
+            <select class="form-select" id="stockModalOperation" onchange="toggleStockOperationFields()">
+              <option value="add">Ajouter au stock</option>
+              <option value="remove">Retirer du stock</option>
+              <option value="set">Définir une nouvelle valeur</option>
+            </select>
+          </div>
+          
+          <div class="form-group" id="stockModalQuantityGroup">
+            <label>Quantité</label>
+            <input type="number" class="form-control" id="stockModalQuantity" min="1" value="1">
+          </div>
+          
+          <div class="form-group" id="stockModalNewValueGroup" style="display: none;">
+            <label>Nouvelle valeur du stock</label>
+            <input type="number" class="form-control" id="stockModalNewValue" min="0" value="0">
+          </div>
+          
+          <div class="form-group">
+            <label>Raison du mouvement</label>
+            <select class="form-select" id="stockModalReason">
+              <option value="reception">Réception fournisseur</option>
+              <option value="ajustement">Ajustement inventaire</option>
+              <option value="retour">Retour</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Commentaires</label>
+            <textarea class="form-control" id="stockModalComment" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-rouge" onclick="updateStock()">Mettre à jour</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Mouvement de stock -->
+  <div class="modal fade" id="stockMovementModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Nouveau mouvement de stock</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Produit</label>
+            <select class="form-select" id="movementProductId">
+              <option value="">Sélectionnez un produit</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Type de mouvement</label>
+            <select class="form-select" id="movementType">
+              <option value="entree">Entrée en stock</option>
+              <option value="sortie">Sortie de stock</option>
+              <option value="ajustement">Ajustement</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Quantité</label>
+            <input type="number" class="form-control" id="movementQuantity" min="1" value="1">
+          </div>
+          
+          <div class="form-group">
+            <label>Raison</label>
+            <select class="form-select" id="movementReason">
+              <option value="reception">Réception fournisseur</option>
+              <option value="retour_fournisseur">Retour fournisseur</option>
+              <option value="inventaire">Ajustement inventaire</option>
+              <option value="perte">Perte/Détérioration</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Commentaires</label>
+            <textarea class="form-control" id="movementComment" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-rouge" onclick="addStockMovementFromModal()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Visualisation Facture avec le même style que la première version -->
+  <div class="modal fade" id="invoiceModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(135deg, var(--rouge-profond), var(--or-eclatant));">
+          <h5 class="modal-title">
+            <i class="fas fa-file-invoice me-2"></i>Facture <span id="invoiceModalNumber"></span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="invoiceContent" style="background: white; max-width: 800px; margin: 0 auto;">
+            <!-- Le contenu de la facture sera injecté ici -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-1"></i> Fermer
+          </button>
+          <button type="button" class="btn btn-or" onclick="downloadInvoicePDF()">
+            <i class="fas fa-download me-1"></i> Télécharger PDF
+          </button>
+          <button type="button" class="btn btn-rouge" onclick="printInvoice()">
+            <i class="fas fa-print me-1"></i> Imprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Visualisation Bulletin de Salaire (même style que la facture) -->
+  <div class="modal fade" id="payslipModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(135deg, var(--rouge-profond), var(--vert-emeraude));">
+          <h5 class="modal-title">
+            <i class="fas fa-file-pdf me-2"></i>Bulletin de Salaire <span id="payslipModalNumber"></span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="payslipContent" style="background: white; max-width: 800px; margin: 0 auto;">
+            <!-- Le contenu du bulletin sera injecté ici -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-1"></i> Fermer
+          </button>
+          <button type="button" class="btn btn-or" onclick="downloadPayslipPDF()">
+            <i class="fas fa-download me-1"></i> Télécharger PDF
+          </button>
+          <button type="button" class="btn btn-rouge" onclick="printPayslip()">
+            <i class="fas fa-print me-1"></i> Imprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Catégorie -->
+  <div class="modal fade" id="addCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter une catégorie</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nom de la catégorie</label>
+            <input type="text" class="form-control" id="newCategoryName" placeholder="Ex: Art de la table">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-rouge" onclick="addCategory()">Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <script src="data.js"></script>
+   <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables -->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+ 
+</body>
+</html>

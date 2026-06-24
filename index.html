@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGILEC</title>
+  <meta name="google-site-verification" content="WhFounBUvL8lYCdjabRKBFmKEvzMrFXhK7qXd0Ht2wI" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Icon Logo -->
+  <link rel="shortcut icon" href="images/Regilec.png"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --rouge-profond: #16a5aa;
+      --or-eclatant: #000000;
+      color: #1e2a2e;
+      --vert-emeraude: #16a5aa;
+      --blanc-casse: #FDF5E6;
+      --gris-elegant: #2c2c2c;
+      --ombre-legere: rgba(0, 0, 0, 0.03);
+      --ombre-doree: rgba(212, 175, 55, 0.15);
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--blanc-casse);
+      color: var(--gris-elegant);
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Logo avec image réelle */
+    .logo-njeeygu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-image {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--or-eclatant);
+      box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+      background: white;
+    }
+    .logo-text {
+      font-weight: 700;
+      color: var(--rouge-profond);
+      line-height: 1;
+      font-size: 1.1rem;
+    }
+    .logo-text .le-grand-jour {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--blanc-casse);
+      background: var(--rouge-profond);
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    
+    /* Navbar ultra compacte */
+    .navbar {
+      background: var(--blanc-casse) !important;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 0.2rem 0;
+      box-shadow: 0 2px 10px var(--ombre-legere);
+    }
+    .nav-link {
+      color: var(--rouge-profond) !important;
+      font-weight: 500;
+      margin: 0 6px;
+      padding: 0.2rem 0 !important;
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--or-eclatant) !important;
+    }
+    
+    /* Boutons compacts */
+    .btn-rouge, .btn-or {
+      padding: 5px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-rouge {
+      background: var(--rouge-profond);
+      color: var(--blanc-casse);
+      box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+    }
+    .btn-or {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      box-shadow: 0 3px 10px rgba(212,175,55,0.2);
+    }
+    .btn-rouge:hover {
+      background: #6b0000;
+      transform: translateY(-1px);
+    }
+    .btn-or:hover {
+      background: #b8960f;
+      transform: translateY(-1px);
+    }
+    
+    /* Hero section équilibrée */
+    .hero-accueil {
+      background: 
+       url('serhead/head1.png') no-repeat;
+      background-size: cover;
+      background-position: center;
+      padding: 80px 0 90px;
+      color: var(--blanc-casse);
+    }
+    .hero-accueil h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--or-eclatant);
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+    .hero-accueil p {
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 1.2rem;
+      opacity: 0.95;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--or-eclatant);
+      padding: 0.2rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+    }
+    
+    /* Corps de page amélioré - Cards élégantes et aérées */
+    .card-avantage {
+      background: white;
+      padding: 2rem 1.5rem;
+      border-radius: 24px;
+      text-align: center;
+      border: 1px solid rgba(212,175,55,0.1);
+      height: 100%;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px var(--ombre-legere);
+    }
+    .card-avantage:hover {
+      transform: translateY(-5px);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 15px 30px var(--ombre-doree);
+    }
+    .card-avantage i {
+      font-size: 2.5rem;
+      color: var(--or-eclatant);
+      margin-bottom: 1rem;
+    }
+    .card-avantage h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--rouge-profond);
+    }
+    .card-avantage p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+    
+    /* Témoignages améliorés - version CARROUSEL */
+    .temoignage-card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 24px;
+      border: 1px solid rgba(212,175,55,0.1);
+      height: 100%;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px var(--ombre-legere);
+      text-align: center;
+      margin: 10px;
+    }
+    .temoignage-card:hover {
+      border-color: var(--or-eclatant);
+      box-shadow: 0 15px 30px var(--ombre-doree);
+    }
+    .temoignage-card p {
+      font-size: 0.95rem;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+      color: #444;
+      line-height: 1.7;
+    }
+    .temoignage-card h5 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: var(--rouge-profond);
+    }
+    
+    /* Contrôles du carrousel pour témoignages */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      background: var(--or-eclatant);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.8;
+    }
+    .carousel-control-prev {
+      left: -20px;
+    }
+    .carousel-control-next {
+      right: -20px;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+      background: var(--rouge-profond);
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: brightness(0) invert(1);
+    }
+    .carousel-indicators {
+      bottom: -40px;
+    }
+    .carousel-indicators button {
+      background-color: var(--or-eclatant) !important;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    .carousel-indicators button.active {
+      background-color: var(--rouge-profond) !important;
+    }
+    
+    /* Sections avec proportions équilibrées */
+    section {
+      padding: 50px 0;
+    }
+    .section-title {
+      font-size: 2.3rem;
+      margin-bottom: 0.3rem;
+      color: var(--rouge-profond);
+    }
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    
+    /* Images élégantes */
+    .img-elegante {
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border: 2px solid rgba(212,175,55,0.2);
+      transition: all 0.3s ease;
+    }
+    .img-elegante:hover {
+      transform: scale(1.02);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 20px 40px rgba(139,0,0,0.15);
+    }
+    
+    /* Galerie d'images avec descriptions */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .gallery-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      border: 2px solid rgba(212,175,55,0.2);
+      border-radius: 20px;
+    }
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.05);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(139,0,0,0.9), transparent);
+      color: var(--blanc-casse);
+      padding: 1.5rem 1rem 1rem;
+      border-radius: 0 0 20px 20px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    .gallery-overlay h4 {
+      color: var(--or-eclatant);
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    .gallery-overlay p {
+      font-size: 0.8rem;
+      margin-bottom: 0;
+      opacity: 0.9;
+    }
+    
+    /* Services avec descriptions - 2 PAR LIGNE SUR TOUS LES ÉCRANS */
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px var(--ombre-legere);
+      border: 1px solid rgba(212,175,55,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 20px 35px var(--ombre-doree);
+    }
+    .service-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--or-eclatant);
+    }
+    .service-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-content h4 {
+      color: var(--rouge-profond);
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+    .service-content p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .service-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-top: auto;
+    }
+    .service-features li {
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+      color: #666;
+    }
+    .service-features i {
+      color: var(--or-eclatant);
+      width: 20px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+    
+    /* 2 colonnes sur tous les écrans */
+    .service-col {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+    
+    /* Ajustements pour mobile */
+    @media (max-width: 768px) {
+      .service-img {
+        height: 140px; /* Images plus petites sur mobile */
+      }
+      
+      .service-content {
+        padding: 1rem;
+      }
+      
+      .service-content h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .service-content p {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limite le texte à 2 lignes */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      
+      .service-features li {
+        font-size: 0.7rem;
+        margin-bottom: 0.2rem;
+      }
+      
+      .service-features i {
+        font-size: 0.7rem;
+        width: 16px;
+      }
+    }
+    
+    /* CTA compact */
+    .cta-section {
+      background: var(--rouge-profond);
+      padding: 40px 0;
+    }
+    
+    /* Footer ultra compact */
+    footer {
+      background: var(--rouge-profond);
+      color: var(--blanc-casse);
+      padding: 30px 0 15px;
+      border-top: 2px solid var(--or-eclatant);
+      font-size: 0.8rem;
+    }
+    .footer-title {
+      color: var(--or-eclatant);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .social-links a {
+      width: 30px;
+      height: 30px;
+      background: rgba(212,175,55,0.1);
+      color: var(--or-eclatant);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+      border: 1px solid var(--or-eclatant);
+      font-size: 0.8rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      transform: translateY(-2px);
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+      line-height: 1.8;
+    }
+    .footer-links a:hover {
+      color: var(--or-eclatant);
+    }
+    
+    /* Ligne décorative */
+    .divider-small {
+      width: 50px;
+      height: 2px;
+      background: var(--or-eclatant);
+      margin: 1rem 0 1.5rem;
+    }
+    
+    /* Espacement optimisé */
+    .container {
+      max-width: 1140px;
+    }
+    .row {
+      --bs-gutter-x: 1.5rem;
+    }
+    
+    /* Ajustement pour mobile du carrousel */
+    @media (max-width: 768px) {
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 30px;
+        height: 30px;
+      }
+      .carousel-control-prev {
+        left: -5px;
+      }
+      .carousel-control-next {
+        right: -5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation ultra compacte -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="logo-njeeygu">
+          <!-- Logo image réelle -->
+          <img src="images/Regilec.png" 
+               alt="NJEEYGU Logo" 
+               class="logo-image"
+               onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&w=200&h=200&fit=crop';">
+          <div class="logo-text">
+            REGILEC
+            <span class="le-grand-jour">Votre Partenaire de Qualité</span>
+          </div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="boutique.html">Boutique</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+          <li class="nav-item ms-2">
+            <a href="contact.html" class="btn btn-or btn-sm">Devis</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero section équilibrée -->
+  <section class="hero-accueil">
+    <div class="container text-center">
+      <span class="hero-badge"><i class="fas fa-star me-1"></i> Dakar Sénégal</span>
+      <h1>REGILEC</h1>
+      <p>Sécurisez vos installations et optimisez vos performances électriques</p>
+      <div class="d-flex justify-content-center gap-2">
+        <a href="contact.html" class="btn btn-or">Contact</a>
+        <a href="boutique.html" class="btn btn-rouge">Boutique</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction avec image -->
+  <section>
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <h2 class="section-title">Bienvenue chez <span style="color: var(--or-eclatant);">REGILEC</span></h2>
+          <div class="divider-small"></div>
+          <p class="mb-3">REGILEC est une entreprise spécialisée dans l'ingénierie, l'installation électrique industrielle
+                             et l'optimisation des performances énergétiques. Nous accompagnons les entreprises dans la sécurisation 
+                             de leurs infrastructures et la maîtrise de leurs coûts d'exploitation.
+                           Qu'il s'agisse de concevoir des tableaux généraux (TGBT), de diagnostiquer des anomalies
+                            critiques cachées (câbles sous-dimensionnés,
+                             pollution harmonique) ou de déployer des solutions de compensation réactive, notre équipe d'ingénieurs et de techniciens
+                              qualifiés garantit des interventions d'une rigueur absolue.</p>
+          <div class="row mt-4">
+            <div class="col-6">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-medal me-2" style="color: var(--or-eclatant);"></i>
+                <span><strong>Excellence</strong><br><small class="text-muted">reconnue</small></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-heart me-2" style="color: var(--or-eclatant);"></i>
+                <span><strong>Sécurité</strong><br><small class="text-muted">Absolue</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <img src="SerHead/serv4.png" alt="Mariage élégant" class="img-elegante">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Nos services avec descriptions détaillées - HORIZONTAL PAR 2 SUR TOUS ÉCRANS -->
+  <section>
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Nos services</h2>
+        <p class="section-subtitle">Des solutions électriques globales pour l'industrie et le tertiaire</p>
+      </div>
+      <div class="row g-4">
+        <!-- Service 1 -->
+        <div class="service-col">
+          <div class="service-card">
+            <img src="SerHead/serv1.png" alt="Décoration" class="service-img">
+            <div class="service-content">
+              <h4>Audit & Qualité Réseau</h4>
+              <p>Campagnes de mesures approfondies et traçabilité complète pour
+                 identifier les failles masquées de vos installations.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> Collecte de données massives: Déploiement d'analyseurs de réseau
+                   électrique haut de gamme (type AWD 300 ACREL) générant plus d'un million de points de mesures en temps réel.</li>
+                <li><i class="fas fa-check"></i> Cartographie des consommations: Analyse fine des profils de charge pour identifier les équipements
+                   énergivores (ciblages prioritaires des systèmes de climatisation et motorisations industrielles).</li>
+                <li><i class="fas fa-check"></i> Expertise sécurité: Diagnostic des câbles sous-dimensionnés et détection précoce des échauffements
+                   anormaux derrière les cloisons pour prévenir tout départ de feu.</li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="service-col">
+          <div class="service-card">
+            <img src="SerHead/serv2.png" alt="Accessoires" class="service-img">
+            <div class="service-content">
+              <h4>Systèmes de Compensation Énergétique</h4>
+              <p>Conception et installation d'armoires de compensation automatique
+                 pour supprimer vos pénalités de puissance réactive.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> Étude de dimensionnement: Évaluation précise
+                   de votre facteur de puissance actuel ($\cos \phi$) à partir des historiques de consommation et mesures sur site.</li>
+                <li><i class="fas fa-check"></i> Conception sur mesure : Fabrication et pose sur châssis d'armoires de compensation fixe
+                   et automatique de fortes puissances (jusqu'à 290 kVAR et plus).</li>
+                <li><i class="fas fa-check"></i> Garantie ROI SENELEC : Redressement du facteur de puissance au-delà du seuil réglementaire de 
+                  $0,80$ pour éliminer à 100 % les pénalités pour consommation réactive et viser un bonus de 2 à 3 % sur vos factures globales.</li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="service-col">
+          <div class="service-card">
+            <img src="SerHead/serv3.png" alt="Événementiel" class="service-img">
+            <div class="service-content">
+              <h4>Ingénierie & Courants Forts</h4>
+              <p>Conception, câblage et mise en service d'équipements de distribution de forte puissance selon la norme NF C 15-100.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> Infrastructures de distribution: Fourniture, pose et raccordement de Tableaux Généraux Basse Tension (TGBT) et d'armoires de distribution complexes.</li>
+                <li><i class="fas fa-check"></i> Câblage de puissance: Tirage de lignes d'alimentation de fortes sections (câbles cuivre allant jusqu'à $300\text{ mm}^2$) et pose d'appareillages de coupure industrielle de forte intensité (type disjoncteurs GoPact MCCB).</li>
+                <li><i class="fas fa-check"></i> Études & Schémas: Production de notes de calcul de section, schémas unifilaires architecturaux et bilans de puissance complets (jusqu'à $292\text{ kVA}$ et plus).</li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Service 4 -->
+        <div class="service-col">
+          <div class="service-card">
+            <img src="SerHead/serv4.png" alt="Conseil" class="service-img">
+            <div class="service-content">
+              <h4>Analyse Harmonique & Protection</h4>
+              <p>Diagnostic et élimination des perturbations harmoniques pour sécuriser vos équipements informatiques et automates sensibles.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> Mesure des distorsions: Analyse complète du taux d'harmoniques en courant ($\text{THD}_i$) pouvant atteindre des seuils critiques (ex: $76\ \text{\%}$).</li>
+                <li><i class="fas fa-check"></i> Solutions d'atténuation: Dimensionnement et pose de dispositifs de filtrage adaptés pour assainir l'onde de courant de votre réseau.</li>
+                <li><i class="fas fa-check"></i> Protection du matériel: Suppression des micro-coupures, des déclenchements intempestifs de disjoncteurs et blocage du vieillissement prématuré de vos serveurs, variateurs et cartes électroniques.</li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Nos réalisations avec descriptions -->
+  <section>
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Nos réalisations</h2>
+        <p class="section-subtitle">Des réalisations phares, calquée exactement sur la structure et le format</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="gallery-item">
+            <img src="SerHead/head2.png" alt="Mariage traditionnel" class="gallery-img">
+            <div class="gallery-overlay">
+              <h4>Compensation automatique à Mbour</h4>
+              <p> Installation d'une armoire de compensation automatique de $290\text{ kVAR}$ pour SCL Energies Solution. 
+            Suppression complète des pénalités SENELEC et redressement du facteur de puissance à un $\cos \phi$ supérieur à $0,95$.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-item">
+            <img src="SerHead/head3.png" alt="Baptême" class="gallery-img">
+            <div class="gallery-overlay">
+              <h4>Restructuration de réseau à Rufisque</h4>
+              <p> Audit de conformité technique et modernisation intégrée des lignes câblées pour un site industriel majeur. 
+                Remplacement des sections sous-dimensionnées et déploiement d'appareillages de coupure conformes à la norme NF C 15-100.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-item">
+            <img src="SerHead/head4.png" alt="Réception" class="gallery-img">
+            <div class="gallery-overlay">
+              <h4>Dépollution harmonique sur site sensible</h4>
+              <p>Campagne de mesure approfondie et analyse de plus d'un million de points de données. Stabilisation d'un parc d'équipements face
+                 à un taux de distorsion harmonique ($\text{THD}_i$) critique de $76\%$ pour stopper les pannes d'automates.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avantages - Corps amélioré -->
+  <section class="bg-white">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Pourquoi nous choisir ?</h2>
+        <p class="section-subtitle">Une ingénierie de précision pour vos performances industrielles</p>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card-avantage">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3>Diagnostics rigoureux et de haute précision</h3>
+            <p>Déploiement d'analyseurs de réseau avancés générant plus d'un million de points de données
+               pour cartographier vos charges électriques. Nous identifions avec exactitude les anomalies critiques cachées, des surcharges thermiques aux câbles sous-dimensionnés.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-avantage">
+            <i class="fas fa-box-open"></i>
+            <h3>Garantie ROI et suppression des pénalités</h3>
+            <p> Des interventions stratégiques conçues pour éliminer 100% des pénalités SENELEC liées à la consommation de puissance réactive. En redressant votre $\cos \phi$ au-delà de
+               0,95, nous transformons vos pertes réseau en bonus tarifaires concrets.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-avantage">
+            <i class="fas fa-gem"></i>
+            <h3>Solutions clés en main et continuité de service</h3>
+            <p>Une prise en charge logistique et technique intégrée, avec des délais d'exécution optimisés allant de 5 à 30 jours. Chaque installation s'accompagne de tests d'isolement normés,
+               d'une garantie totale et de 3 mois de maintenance préventive offerts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignages en CARROUSEL -->
+  <section class="bg-white">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Ils nous ont fait confiance</h2>
+        <p class="section-subtitle">Des Resultats Jste et Economiques</p>
+      </div>
+      
+      <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicateurs -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Témoignage 1"></button>
+          <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" aria-label="Témoignage 2"></button>
+          <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" aria-label="Témoignage 3"></button>
+        </div>
+        
+        <!-- Slides -->
+        <div class="carousel-inner">
+          <!-- Slide 1 - Fatou & Amadou -->
+          <div class="carousel-item active">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="temoignage-card">
+                  <img src="https://images.unsplash.com/photo-1583939003579-730e1918ee0a?q=80&w=1974&auto=format&fit=crop" alt="Mariage" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--or-eclatant); margin-bottom: 1rem;">
+                  <p>"Une baisse immédiate de nos charges électriques. Grâce à l'installation de leur armoire automatique à Mbour, REGILEC a totalement supprimé nos pénalités financières auprès de la SENELEC."</p>
+                  <div>
+                    <h5 class="mb-0">Mr Camara Amadou</h5>
+                    <small class="text-muted">Compensation</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 2 - Marieme Diallo -->
+          <div class="carousel-item">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="temoignage-card">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976&auto=format&fit=crop" alt="Baptême" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--or-eclatant); margin-bottom: 1rem;">
+                  <p>"Une rigueur technique absolue sur notre site industriel de Rufisque. Leur audit a permis de restructurer entièrement nos réseaux câblés obsolètes et de sécuriser durablement nos équipes."</p>
+                  <div>
+                    <h5 class="mb-0">Mme Diallo Marieme </h5>
+                    <small class="text-muted">Sécurité</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 3 - Groupe BSO -->
+          <div class="carousel-item">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="temoignage-card">
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" alt="Événement pro" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--or-eclatant); margin-bottom: 1rem;">
+                  <p>"Des experts de haut niveau. Notre parc d'équipements sensibles subissait des pannes régulières à cause des harmoniques, mais leur diagnostic précis a stabilisé l'ensemble du réseau."</p>
+                  <div>
+                    <h5 class="mb-0">Groupe BSO</h5>
+                    <small class="text-muted">Stabilité</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contrôles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA compact -->
+  <section class="cta-section">
+    <div class="container text-center text-white">
+      <h3 class="fw-bold mb-2">Prêt pour votre transition énergétique ?</h3>
+      <p class="small opacity-75 mb-3">Audit? devis et étude technique personnalisée de vos installations.</p>
+      <a href="contact.html" class="btn btn-or btn-sm px-4">Demander un Devis</a>
+    </div>
+  </section>
+
+  <!-- Footer ultra compact -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-2">
+          <div class="logo-njeeygu mb-1">
+            <!-- Petit logo dans footer -->
+            <img src="images/Regilec.png" 
+                 alt="NJEEYGU Logo" 
+                 style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--or-eclatant);"
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&w=200&h=200&fit=crop';">
+            <span style="color: var(--or-eclatant); font-weight: 600; margin-left: 8px;">REGILEC</span>
+          </div>
+          <p class="small opacity-75">Votre Partenaire de Qualité</p>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <h5 class="footer-title">Liens</h5>
+          <div class="footer-links d-flex gap-3">
+            <a href="index.html">Accueil</a>
+            <a href="boutique.html">Boutique</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <h5 class="footer-title">Social</h5>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="border-light opacity-25 my-2">
+      <p class="small opacity-75 text-center mb-0">© 2026 BCM-GROUPE</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  
+</body>
+</html>

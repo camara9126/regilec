@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGILEC · À propos - Notre Histoire</title>
+  <meta name="google-site-verification" content="WhFounBUvL8lYCdjabRKBFmKEvzMrFXhK7qXd0Ht2wI" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+   <!-- Icon Logo -->
+  <link rel="shortcut icon" href="images/Regilec.png"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --rouge-profond: #16a5aa;
+      --or-eclatant: #000000;
+      --vert-emeraude: #006B54;
+      --blanc-casse: #FDF5E6;
+      --gris-elegant: #2c2c2c;
+      --ombre-legere: rgba(0, 0, 0, 0.03);
+      --ombre-doree: rgba(212, 175, 55, 0.15);
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--blanc-casse);
+      color: var(--gris-elegant);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Logo avec image réelle */
+    .logo-njeeygu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-image {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--or-eclatant);
+      box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+      background: white;
+    }
+    .logo-text {
+      font-weight: 700;
+      color: var(--rouge-profond);
+      line-height: 1;
+      font-size: 1.1rem;
+    }
+    .logo-text .le-grand-jour {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--blanc-casse);
+      background: var(--rouge-profond);
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    
+    /* Navbar ultra compacte */
+    .navbar {
+      background: var(--blanc-casse) !important;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 0.2rem 0;
+      box-shadow: 0 2px 10px var(--ombre-legere);
+    }
+    .nav-link {
+      color: var(--rouge-profond) !important;
+      font-weight: 500;
+      margin: 0 6px;
+      padding: 0.2rem 0 !important;
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--or-eclatant) !important;
+    }
+    .nav-link.active {
+      font-weight: 600;
+    }
+    
+    /* Boutons compacts */
+    .btn-rouge, .btn-or {
+      padding: 8px 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-rouge {
+      background: var(--rouge-profond);
+      color: var(--blanc-casse);
+      box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+    }
+    .btn-or {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      box-shadow: 0 3px 10px rgba(212,175,55,0.2);
+    }
+    .btn-rouge:hover {
+      background: #6b0000;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139,0,0,0.3);
+    }
+    .btn-or:hover {
+      background: #b8960f;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+    }
+    
+    /* Hero À propos amélioré */
+    .hero-apropos {
+      background: 
+                   url('SerHead/head2.png') no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 100px 0 120px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    .hero-apropos h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--or-eclatant);
+      margin-bottom: 1rem;
+    }
+    .hero-apropos p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--or-eclatant);
+      padding: 0.3rem 1.5rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Section histoire améliorée - TEXTE RÉDUIT */
+    .histoire-section {
+      padding: 70px 0;
+    }
+    .histoire-texte {
+      font-size: 0.95rem; /* Réduit de 1.1rem à 0.95rem */
+      line-height: 1.7; /* Ajusté pour meilleure lisibilité */
+      column-count: 2;
+      column-gap: 30px; /* Réduit pour meilleur équilibre */
+      text-align: justify;
+      color: #444;
+    }
+    @media (max-width: 768px) {
+      .histoire-texte {
+        column-count: 1;
+      }
+    }
+    .signature {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; /* Légèrement réduit */
+      color: var(--rouge-profond);
+      margin-top: 1.5rem;
+    }
+    
+    /* Stats améliorées */
+    .stat-item {
+      text-align: center;
+      padding: 30px 20px;
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 15px 30px var(--ombre-legere);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212,175,55,0.1);
+      height: 100%;
+    }
+    .stat-item:hover {
+      transform: translateY(-8px);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 25px 45px var(--ombre-doree);
+    }
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--or-eclatant);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--rouge-profond);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Valeurs améliorées */
+    .valeur-card {
+      background: linear-gradient(135deg, var(--rouge-profond), #6b0000);
+      color: white;
+      padding: 40px 30px;
+      border-radius: 30px;
+      height: 100%;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      text-align: center;
+    }
+    .valeur-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 25px 45px var(--ombre-doree);
+    }
+    .valeur-card i {
+      font-size: 3.2rem;
+      color: var(--or-eclatant);
+      margin-bottom: 1.5rem;
+    }
+    .valeur-card h3 {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .valeur-card p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    
+    /* Équipe en CARROUSEL */
+    .team-slide {
+      padding: 10px;
+    }
+    .team-card {
+      background: white;
+      border-radius: 30px;
+      padding: 30px 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212,175,55,0.1);
+      box-shadow: 0 15px 30px var(--ombre-legere);
+      height: 100%;
+      margin: 0 10px;
+    }
+    .team-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 25px 45px var(--ombre-doree);
+    }
+    .team-card img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--or-eclatant);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 25px rgba(139,0,0,0.2);
+    }
+    .team-card h3 {
+      color: var(--rouge-profond);
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .team-card .role {
+      color: var(--or-eclatant);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .team-card p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.2rem;
+    }
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .team-social a {
+      width: 35px;
+      height: 35px;
+      background: rgba(212,175,55,0.1);
+      color: var(--or-eclatant);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--or-eclatant);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .team-social a:hover {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      transform: translateY(-3px);
+    }
+    
+    /* Contrôles du carrousel */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      background: var(--or-eclatant);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.8;
+    }
+    .carousel-control-prev {
+      left: -20px;
+    }
+    .carousel-control-next {
+      right: -20px;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+      background: var(--rouge-profond);
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: brightness(0) invert(1);
+    }
+    .carousel-indicators {
+      bottom: -40px;
+    }
+    .carousel-indicators button {
+      background-color: var(--or-eclatant) !important;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    .carousel-indicators button.active {
+      background-color: var(--rouge-profond) !important;
+    }
+    
+    /* Timeline histoire */
+    .timeline-mini {
+      position: relative;
+      padding: 20px 0;
+    }
+    .timeline-mini-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .timeline-year {
+      min-width: 100px;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--or-eclatant);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+    .timeline-content {
+      padding-bottom: 20px;
+      border-bottom: 1px dashed rgba(212,175,55,0.3);
+    }
+    .timeline-content h4 {
+      color: var(--rouge-profond);
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    /* Sections */
+    section {
+      padding: 60px 0;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--rouge-profond);
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2.5rem;
+    }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--or-eclatant);
+      margin: 1rem 0 1.5rem;
+    }
+    
+    /* Images */
+    .img-elegante {
+      border-radius: 24px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+      border: 2px solid rgba(212,175,55,0.2);
+      transition: all 0.3s ease;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .img-elegante:hover {
+      transform: scale(1.02);
+      border-color: var(--or-eclatant);
+      box-shadow: 0 25px 45px var(--ombre-doree);
+    }
+    
+    /* Footer compact */
+    footer {
+      background: var(--rouge-profond);
+      color: var(--blanc-casse);
+      padding: 50px 0 20px;
+      border-top: 2px solid var(--or-eclatant);
+      margin-top: 60px;
+    }
+    .footer-title {
+      color: var(--or-eclatant);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    .social-links a {
+      width: 34px;
+      height: 34px;
+      background: rgba(212,175,55,0.1);
+      color: var(--or-eclatant);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      border: 1px solid var(--or-eclatant);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      background: var(--or-eclatant);
+      color: var(--rouge-profond);
+      transform: translateY(-3px);
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+    .footer-links a:hover {
+      color: var(--or-eclatant);
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1140px;
+    }
+    
+    /* Ajustement pour mobile du carrousel */
+    @media (max-width: 768px) {
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 30px;
+        height: 30px;
+      }
+      .carousel-control-prev {
+        left: -5px;
+      }
+      .carousel-control-next {
+        right: -5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation compacte -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="logo-njeeygu">
+          <!-- Logo image réelle -->
+          <img src="images/Regilec.png" 
+               alt="NJEEYGU Logo" 
+               class="logo-image"
+               onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&w=200&h=200&fit=crop';">
+          <div class="logo-text">
+            REGILEC
+            <span class="le-grand-jour">Votre Partenaire de Qualité</span>
+          </div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="boutique.html">Boutique</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link active" href="apropos.html">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+          <li class="nav-item ms-2">
+            <a href="contact.html" class="btn btn-or btn-sm">Demander un Devis</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero amélioré -->
+  <div class="hero-apropos">
+    <div class="container">
+      <span class="hero-badge"><i class="fas fa-crown me-2"></i>DEPUIS 2015</span>
+      <h1 class="display-3 fw-bold">Notre Histoire</h1>
+      <p class="fs-4">L'ingénierie électrique au cœur de la performance industrielle au Sénégal</p>
+    </div>
+  </div>
+
+  <!-- Section Histoire améliorée avec image - TEXTE RÉDUIT -->
+  <section class="histoire-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2 class="section-title">L'histoire derrière <span style="color: var(--or-eclatant);">Le Grand Jour</span></h2>
+          <div class="divider"></div>
+          <div class="histoire-texte mb-4">
+            <p>Installée au Sénégal, l'entreprise REGILEC est née d'une ambition claire : apporter une rigueur scientifique et une technicité sans faille au cœur des infrastructures électriques professionnelles. Notre nom incarne la régulation, la conformité réglementaire et l'ingénierie électrique, des valeurs fondamentales que nous insufflons dans chaque projet depuis notre création.
+              Nous croyons que la sécurité d'un site industriel repose sur la précision invisible de ses connexions et la parfaite maîtrise de sa puissance. Depuis notre ouverture, nous avons eu le privilège d'accompagner de nombreuses entreprises dans la restructuration de leurs réseaux et l'optimisation de leurs factures énergétiques.</p>
+            <p>De l'audit de conformité technique à Rufisque jusqu'à la mise en service d'armoires de compensation automatique de fortes puissances à Mbour, nous intervenons sur des parcs d'équipements hautement stratégiques.</p>
+            <p>Notre équipe d'ingénieurs et de techniciens qualifiés travaille sans relâche pour concevoir des solutions sur mesure qui s'alignent parfaitement sur les normes NF C 15-100 et les exigences de la SENELEC. Nous puisons notre force opérationnelle dans l'expertise locale tout en intégrant les technologies d'analyse de réseau les plus avancées du secteur pour garantir un retour sur investissement mesurable et immédiat à nos partenaires.</p>
+          </div>
+          <div class="signature">
+            <i class="fas fa-quote-left me-2" style="color: var(--or-eclatant);"></i> Mr Mandiaye SOW, Fondateur
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop" alt="Boutique NJEEYGU" class="img-elegante" style="height: 500px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline histoire -->
+   <!-- <section class="bg-white">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Notre parcours</h2>
+        <p class="section-subtitle">Les dates clés qui ont marqué notre histoire</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="timeline-mini">
+            <div class="timeline-mini-item">
+              <div class="timeline-year">2015</div>
+              <div class="timeline-content">
+                <h4>Création de NJEEYGU</h4>
+                <p>Ouverture de la première boutique à Saint-Louis avec une équipe de 3 passionnés.</p>
+              </div>
+            </div>
+            <div class="timeline-mini-item">
+              <div class="timeline-year">2018</div>
+              <div class="timeline-content">
+                <h4>Premier grand mariage</h4>
+                <p>Organisation d'un mariage de 300 personnes qui nous a fait connaître dans la région.</p>
+              </div>
+            </div>
+            <div class="timeline-mini-item">
+              <div class="timeline-year">2020</div>
+              <div class="timeline-content">
+                <h4>Extension de l'équipe</h4>
+                <p>Nous passons à 8 collaborateurs et ouvrons notre atelier de création.</p>
+              </div>
+            </div>
+            <div class="timeline-mini-item">
+              <div class="timeline-year">2023</div>
+              <div class="timeline-content">
+                <h4>500e événement</h4>
+                <p>Cap des 500 événements franchi, une fierté pour toute l'équipe.</p>
+              </div>
+            </div>
+            <div class="timeline-mini-item">
+              <div class="timeline-year">2025</div>
+              <div class="timeline-content">
+                <h4>10 ans d'excellence</h4>
+                <p>Nous célébrons une décennie de passion et de beaux moments partagés.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  -->
+
+  <!-- Statistiques améliorées -->
+  <section>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number">1M+</div>
+            <div class="stat-label">POINTS DE DONNÉES</div>
+            <p class="small text-muted mt-2">analysés par campagne de mesure</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Satisfaction</div>
+            <p class="small text-muted mt-2">pénalités SENELEC supprimées</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number">5 à 30 j</div>
+            <div class="stat-label">DE DÉLAI</div>
+            <p class="small text-muted mt-2">de livraison et d'installation respectés</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">CONFORME</div>
+            <p class="small text-muted mt-2">aux exigences de la norme NF C 15-100</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos valeurs améliorées -->
+  <section class="bg-white">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Nos valeurs</h2>
+        <p class="section-subtitle">Ce qui guide notre action au quotidien</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="valeur-card">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>Rigueur</h3>
+            <p>Nous nous engageons pleinement pour la sécurité et la conformité de vos réseaux électriques. Chaque étude, note de calcul de section et diagnostic thermique est traité avec une précision absolue, car votre continuité de service est notre priorité.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="valeur-card">
+            <i class="fas fa-gem"></i>
+            <h3>Excellence</h3>
+            <p>Le souci du détail technique et la quête de la performance optimale nous animent dans chaque intervention. Nous sélectionnons des appareillages de coupure industrielle haut de gamme et appliquons les règles de l'art pour toutes nos armoires de compensation.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="valeur-card">
+            <i class="fas fa-hands"></i>
+            <h3>Rentabilité</h3>
+            <p>Nous respectons vos objectifs économiques tout en apportant des solutions concrètes pour réduire vos dépenses énergétiques. Chaque projet mené par REGILEC est pensé pour générer un retour sur investissement rapide en éliminant les surcoûts inutiles.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Équipe en CARROUSEL -->
+  <section>
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Notre équipe</h2>
+        <p class="section-subtitle">Des passionnés à votre écoute</p>
+      </div>
+      
+      <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicateurs -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#teamCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#teamCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#teamCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        
+        <!-- Slides -->
+        <div class="carousel-inner">
+          <!-- Slide 1 - Mariama -->
+          <div class="carousel-item active">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="team-slide">
+                  <div class="team-card">
+                    <img src="images/log1.png" alt="Mariama Ndiaye">
+                    <h3>Mariama Ndiaye</h3>
+                    <div class="role">Fondatrice & Directrice</div>
+                    <p>Passionnée par l'art et la décoration depuis toujours, elle donne vie à vos rêves avec une créativité sans limite et un sens aigu du détail.</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 2 - Omar -->
+          <div class="carousel-item">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="team-slide">
+                  <div class="team-card">
+                    <img src="images/log1.png" alt="Omar Faye">
+                    <h3>Omar Faye</h3>
+                    <div class="role">Coordinateur événementiel</div>
+                    <p>Le chef d'orchestre qui assure le bon déroulement de chaque projet. Sa rigueur et son organisation sont la clé de la réussite de vos événements.</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 3 - Aïssatou -->
+          <div class="carousel-item">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6">
+                <div class="team-slide">
+                        <div class="team-card">
+                            <img src="images/log1.png" alt="Aïssatou Diop">
+                    <h3>Aïssatou Diop</h3>
+                    <div class="role">Designer d'espace</div>
+                    <p>Elle crée des ambiances uniques et harmonieuses. Son œil expert et sa sensibilité artistique transforment vos lieux en véritables écrins.</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contrôles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
+      </div>
+    </div>
+  </section>  
+
+  <!-- CTA -->
+  <section class="py-4" style="background: var(--rouge-profond);">
+    <div class="container text-center text-white">
+      <h3 class="fw-bold mb-2">Vous avez un projet ?</h3>
+      <p class="small opacity-75 mb-3">Audit, devis et étude technique personnalisée de vos installations.</p>
+      <a href="contact.html" class="btn btn-or btn-sm px-4">Demander un Devis</a>
+    </div>
+  </section>
+
+  <!-- Footer compact -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-3">
+          <div class="logo-njeeygu mb-2">
+            <!-- Petit logo dans footer -->
+            <img src="images/Regilec.png" 
+                 alt="NJEEYGU Logo" 
+                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--or-eclatant);"
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop&w=200&h=200&fit=crop';">
+            <span style="color: var(--or-eclatant); font-weight: 600; margin-left: 8px;">NJEEYGU</span>
+          </div>
+          <p class="small opacity-75">Vous avez le site, nous apportons l'ingénierie. REGILEC ne se contente pas d'auditer vos réseaux, nous concevons des infrastructures électriques fiables, performantes et sécurisées pour vos installations industrielles.</p>
+          <div class="small">
+            <i class="fas fa-map-marker-alt me-1" style="color: var(--or-eclatant);"></i> Dakar, Sénégal<br>
+            <i class="fas fa-phone me-1" style="color: var(--or-eclatant);"></i> +221 77 565 41 22<br>
+            <i class="fas fa-envelope me-1" style="color: var(--or-eclatant);"></i> contact@régilec.com
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <h5 class="footer-title">Liens rapides</h5>
+          <div class="footer-links">
+            <div><a href="index.html">Accueil</a></div>
+            <div><a href="boutique.html">Boutique</a></div>
+            <div><a href="services.html">Services</a></div>
+            <div><a href="apropos.html">À propos</a></div>
+            <div><a href="contact.html">Contact</a></div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <h5 class="footer-title">Suivez-nous</h5>
+          <div class="social-links mb-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <p class="small opacity-75 mb-0">© 2025 2026 BCM-GROUPE Sénégal  - Tous droits réservés</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
